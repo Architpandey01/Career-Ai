@@ -166,7 +166,8 @@ const CareerGuide = () => {
       }
       
       if (suggestions.length > 0) {
-        const response = `✨ Based on your skills${hobbyValues.length > 0 ? ' and interests' : ''}, here are some career suggestions:\n\n${suggestions.map((career, index) => `${index + 1}. ${career.suggestedCareer}`).join('\n')}\n\n🔍 Would you like to know more about any of these careers? Just type the number.`;
+        // Use the improved response function
+        const response = generateCareerSuggestionsResponse(suggestions);
         const newAssistantMessage: Message = {
           id: Date.now().toString(),
           content: response,
@@ -174,6 +175,7 @@ const CareerGuide = () => {
           timestamp: new Date()
         };
         setMessages(prev => [...prev, newAssistantMessage]);
+        setConversationState(ConversationState.SUGGEST_CAREERS);
       } else {
         const noMatchMessage: Message = {
           id: Date.now().toString(),
@@ -316,14 +318,15 @@ The demand for ${career.suggestedCareer}s is ${Math.random() > 0.3 ? 'growing' :
       return `I couldn't find specific career matches based on what you selected, ${userName}. Could you try selecting different skills or hobbies? 😕`;
     }
     
-    let response = `Based on your skills and interests, ${userName}, here are some career paths you might consider: ✨\n\n`;
+    let response = `✨ Based on your skills and interests, here are some career suggestions:\n\n`;
     
     suggestions.forEach((suggestion, index) => {
-      response += `**${index + 1}. ${suggestion.suggestedCareer}**\n`;
-      response += `- 💰 Salary Range: ${suggestion.salaryRange}\n`;
+      response += `${index + 1}. ${suggestion.suggestedCareer}\n`;
     });
     
-    response += "\n🔍 Which of these careers would you like to know more about? You can select one or more by typing their names or numbers (separated by commas if selecting multiple).";
+    response += "\n🔍 Would you like to know more about any of these careers?\n";
+    response += "- Type a single number (like '1') for one career\n";
+    response += "- Or separate multiple numbers with commas (like '1,2,3') for multiple careers";
     
     return response;
   };
@@ -372,23 +375,26 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
   // Handle the message submission with the updated logic
   const handleMessageSubmit = async () => {
     if (inputValue.trim()) {
+      // Store the original input before clearing it
+      const currentInput = inputValue.trim();
+      
+      // Add user message to chat and reset input field
       const userMessage: Message = {
         id: Date.now().toString(),
-        content: inputValue.trim(),
+        content: currentInput,
         role: 'user',
         timestamp: new Date()
       };
-
       setMessages(prev => [...prev, userMessage]);
       setInputValue('');
       setIsLoading(true);
 
       // Handle name input in greeting state
       if (conversationState === ConversationState.GREETING) {
-        setUserName(inputValue.trim());
+        setUserName(currentInput);
         const welcomeMessage: Message = {
           id: Date.now().toString(),
-          content: `Nice to meet you, ${inputValue.trim()}! Let's find the perfect career path for you.\n\n👇 Please select your skills and up to 2 hobbies below. Select your favorite hobby first for better recommendations!`,
+          content: `Nice to meet you, ${currentInput}! 😊 Let's find the perfect career path for you.\n\n👇 Please select your skills and up to 2 hobbies below. Select your favorite hobby first for better recommendations!`,
           role: 'assistant',
           timestamp: new Date(),
           showControls: true
@@ -407,12 +413,12 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
       );
 
       // Check for goodbye message first, before any other processing
-      const isGoodbyeMessage = inputValue.toLowerCase().includes('bye') ||
-                              inputValue.toLowerCase().includes('thank') ||
-                              inputValue.toLowerCase().includes('thats it') ||
-                              inputValue.toLowerCase().includes("that's it") ||
-                              inputValue.toLowerCase().includes('goodbye') ||
-                              inputValue.toLowerCase().includes('see you');
+      const isGoodbyeMessage = currentInput.toLowerCase().includes('bye') ||
+                              currentInput.toLowerCase().includes('thank') ||
+                              currentInput.toLowerCase().includes('thats it') ||
+                              currentInput.toLowerCase().includes("that's it") ||
+                              currentInput.toLowerCase().includes('goodbye') ||
+                              currentInput.toLowerCase().includes('see you');
 
       if (isGoodbyeMessage) {
         const goodbyeMessage: Message = {
@@ -429,50 +435,63 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
 
       // Process career selections when in suggestion state
       if (conversationState === ConversationState.SUGGEST_CAREERS) {
-        // We already added the user message in the parent function, so don't add it again
+        console.log("Processing career selection. Input:", currentInput);
         
-        // Add loading message immediately
-        const loadingMessage: Message = {
-          id: Date.now().toString(),
-          content: "🔍 Analyzing your career selections...",
-          role: 'assistant',
-          timestamp: new Date()
-        };
-        setMessages(prev => [...prev, loadingMessage]);
+        try {
+          let selectedCareers: CareerGuidanceEntry[] = [];
+          
+          // First try to parse using comma as separator
+          if (currentInput.includes(',')) {
+            const numbers = currentInput.split(',')
+              .map(n => parseInt(n.trim()))
+              .filter(n => !isNaN(n) && n > 0 && n <= suggestions.length);
+            
+            if (numbers.length > 0) {
+              selectedCareers = numbers.map(n => suggestions[n - 1]);
+              selectedCareers = Array.from(new Set(selectedCareers));
+            }
+          } 
+          // Then try to parse as a single number
+          else {
+            const singleNumber = parseInt(currentInput.trim());
+            if (!isNaN(singleNumber) && singleNumber > 0 && singleNumber <= suggestions.length) {
+              console.log("Valid single number detected:", singleNumber);
+              selectedCareers = [suggestions[singleNumber - 1]];
+            }
+          }
+          
+          // If no valid selections found, show error message
+          if (selectedCareers.length === 0) {
+            const errorMessage: Message = {
+              id: Date.now().toString(),
+              content: "❌ I couldn't understand your selection. Please:\n- Type a single number (like '1') for one career\n- Or separate multiple numbers with commas (like '1,2,3') for multiple careers",
+              role: 'assistant',
+              timestamp: new Date()
+            };
+            setMessages(prev => [...prev, errorMessage]);
+            setIsLoading(false);
+            return;
+          }
 
-        // Extract all numbers using regex and parse them
-        // This approach handles comma-separated (1,2,3), space-separated (1 2 3), and mixed formats (1, 2 3)
-        const numberMatches = inputValue.match(/\d+/g) || [];
-        
-        // Convert to integers and filter valid selections
-        const validSelections = numberMatches
-          .map(num => parseInt(num))
-          .filter(num => !isNaN(num) && num > 0 && num <= suggestions.length);
-        
-        // Deduplicate selections using Set
-        const uniqueSelections = [...new Set(validSelections)];
-        
-        // Map to career objects
-        const selectedCareers: CareerGuidanceEntry[] = uniqueSelections
-          .map(num => suggestions[num - 1])
-          .filter(career => career !== undefined);
+          // Add loading message
+          const loadingMessage: Message = {
+            id: Date.now().toString(),
+            content: "🔍 Analyzing your career selections...",
+            role: 'assistant',
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, loadingMessage]);
 
-        console.log("Input:", inputValue);
-        console.log("Extracted numbers:", numberMatches);
-        console.log("Valid selections:", validSelections);
-        console.log("Selected careers:", selectedCareers.map(c => c.suggestedCareer));
-
-        // Add artificial delay before showing results
-        setTimeout(() => {
-          if (selectedCareers.length > 0) {
-            // Show basic information for all selected careers first
+          // Process the selected careers with a delay
+          setTimeout(() => {
+            // Show basic information for all selected careers
             const allCareersBasicInfo = selectedCareers.map((career, index) => {
               return `**Career ${index + 1}: ${career.suggestedCareer}**\n\n${generateCareerBasicInfo(career)}`;
             }).join('\n\n---\n\n');
             
             const basicInfoMessage: Message = {
               id: Date.now().toString(),
-              content: `You've selected ${selectedCareers.length} career${selectedCareers.length > 1 ? 's' : ''}. Here's an overview of each:\n\n${allCareersBasicInfo}\n\n💡 Let's explore these careers in detail. Would you like to see the career roadmap for ${selectedCareers[0].suggestedCareer}? (Type 'yes' to view the roadmap, or 'no' to skip to the next career)`,
+              content: `You've selected ${selectedCareers.length} career${selectedCareers.length > 1 ? 's' : ''}. Here's an overview of each:\n\n${allCareersBasicInfo}\n\n💡 Would you like to see the career roadmap for ${selectedCareers[0].suggestedCareer}? (Type 'yes' to view the roadmap, or 'no' to skip to the next career)`,
               role: 'assistant',
               timestamp: new Date()
             };
@@ -482,20 +501,20 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
             setCurrentCareerIndex(0);
             setShowDetailedRoadmap(false);
             setConversationState(ConversationState.DISCUSS_SPECIFIC_CAREER);
-          } else {
-            // No valid career selections found
-            const invalidSelectionMessage: Message = {
-              id: Date.now().toString(),
-              content: "❓ I couldn't understand which careers you're interested in. Please type the numbers of the careers you'd like to learn more about (for example: 1, 2, 3 or 9 2 7).",
-              role: 'assistant',
-              timestamp: new Date()
-            };
-            setMessages(prev => prev.slice(0, -1).concat([invalidSelectionMessage]));
-          }
+            setIsLoading(false);
+          }, 2000);
+          
+        } catch (error) {
+          console.error("Error processing career selection:", error);
+          const errorMessage: Message = {
+            id: Date.now().toString(),
+            content: "Sorry, I encountered an error. Please try again by typing a number (like '1') or multiple numbers separated by commas (like '1,2,3').",
+            role: 'assistant',
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, errorMessage]);
           setIsLoading(false);
-          setInputValue('');
-        }, 4000); // 4-second delay
-
+        }
         return;
       }
 
@@ -503,29 +522,29 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
       if (pendingCareers.length > 0) {
         // Check if this is a response about interest in current career's roadmap
         const isInterestedResponse = 
-          inputValue.toLowerCase().includes('yes') || 
-          inputValue.toLowerCase().includes('yeah') ||
-          inputValue.toLowerCase().includes('sure') ||
-          inputValue.toLowerCase().includes('interested') ||
-          inputValue.toLowerCase().includes('tell me more') ||
-          inputValue.toLowerCase().includes('roadmap') || 
-          inputValue.toLowerCase().includes('path');
+          currentInput.toLowerCase().includes('yes') || 
+          currentInput.toLowerCase().includes('yeah') ||
+          currentInput.toLowerCase().includes('sure') ||
+          currentInput.toLowerCase().includes('interested') ||
+          currentInput.toLowerCase().includes('tell me more') ||
+          currentInput.toLowerCase().includes('roadmap') || 
+          currentInput.toLowerCase().includes('path');
 
         const isNotInterestedResponse = 
-          inputValue.toLowerCase().includes('no') || 
-          inputValue.toLowerCase().includes('nope') ||
-          inputValue.toLowerCase().includes('next') ||
-          inputValue.toLowerCase().includes('skip') ||
-          inputValue.toLowerCase().includes('not interested');
+          currentInput.toLowerCase().includes('no') || 
+          currentInput.toLowerCase().includes('nope') ||
+          currentInput.toLowerCase().includes('next') ||
+          currentInput.toLowerCase().includes('skip') ||
+          currentInput.toLowerCase().includes('not interested');
 
         // Check if the response is neither yes nor no
         const isInvalidResponse = !isInterestedResponse && !isNotInterestedResponse;
 
         if (isInvalidResponse) {
-          // Handle invalid response
+          // Handle invalid response only when we're expecting a yes/no for roadmap
           const errorMessage: Message = {
             id: Date.now().toString(),
-            content: "❓ I couldn't understand your response. Please type 'yes' to view the roadmap, or 'no' to skip to the next career.",
+            content: "❓ I didn't catch that. Please type 'yes' if you want to see the roadmap for this career, or 'no' to skip to the next one.",
             role: 'assistant',
             timestamp: new Date()
           };
@@ -672,51 +691,51 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
       }
 
       // Check for follow-up questions about roadmap, salary, skills, etc.
-      const isRoadmapQuestion = inputValue.toLowerCase().includes('roadmap') || 
-                               inputValue.toLowerCase().includes('path') || 
-                               inputValue.toLowerCase().includes('steps');
+      const isRoadmapQuestion = currentInput.toLowerCase().includes('roadmap') || 
+                               currentInput.toLowerCase().includes('path') || 
+                               currentInput.toLowerCase().includes('steps');
       
-      const isSalaryQuestion = inputValue.toLowerCase().includes('salary') || 
-                              inputValue.toLowerCase().includes('pay') || 
-                              inputValue.toLowerCase().includes('compensation') ||
-                              inputValue.toLowerCase().includes('money');
+      const isSalaryQuestion = currentInput.toLowerCase().includes('salary') || 
+                              currentInput.toLowerCase().includes('pay') || 
+                              currentInput.toLowerCase().includes('compensation') ||
+                              currentInput.toLowerCase().includes('money');
       
-      const isSkillsQuestion = inputValue.toLowerCase().includes('skills') || 
-                              inputValue.toLowerCase().includes('requirements') || 
-                              inputValue.toLowerCase().includes('need to know');
+      const isSkillsQuestion = currentInput.toLowerCase().includes('skills') || 
+                              currentInput.toLowerCase().includes('requirements') || 
+                              currentInput.toLowerCase().includes('need to know');
       
-      const isMoreDetailsRequest = inputValue.toLowerCase().includes('tell me more') || 
-                                  inputValue.toLowerCase().includes('more details') || 
-                                  inputValue.toLowerCase().includes('more information');
+      const isMoreDetailsRequest = currentInput.toLowerCase().includes('tell me more') || 
+                                  currentInput.toLowerCase().includes('more details') || 
+                                  currentInput.toLowerCase().includes('more information');
 
-      const isJobRolesQuestion = inputValue.toLowerCase().includes('job') ||
-                                inputValue.toLowerCase().includes('role') ||
-                                inputValue.includes('position') ||
-                                inputValue.includes('work') ||
-                                inputValue.includes('responsibilities');
+      const isJobRolesQuestion = currentInput.toLowerCase().includes('job') ||
+                                currentInput.toLowerCase().includes('role') ||
+                                currentInput.includes('position') ||
+                                currentInput.includes('work') ||
+                                currentInput.includes('responsibilities');
 
-      const isMarketTrendQuestion = inputValue.toLowerCase().includes('market') ||
-                                   inputValue.toLowerCase().includes('trend') ||
-                                   inputValue.toLowerCase().includes('demand') ||
-                                   inputValue.toLowerCase().includes('future') ||
-                                   inputValue.toLowerCase().includes('growth') ||
-                                   inputValue.toLowerCase().includes('opportunity') ||
-                                   inputValue.toLowerCase().includes('industry');
+      const isMarketTrendQuestion = currentInput.toLowerCase().includes('market') ||
+                                   currentInput.toLowerCase().includes('trend') ||
+                                   currentInput.toLowerCase().includes('demand') ||
+                                   currentInput.toLowerCase().includes('future') ||
+                                   currentInput.toLowerCase().includes('growth') ||
+                                   currentInput.toLowerCase().includes('opportunity') ||
+                                   currentInput.toLowerCase().includes('industry');
 
-      const isCompaniesQuestion = inputValue.toLowerCase().includes('company') ||
-                                  inputValue.toLowerCase().includes('companies') ||
-                                  inputValue.toLowerCase().includes('employer') ||
-                                  inputValue.toLowerCase().includes('corporation') ||
-                                  inputValue.toLowerCase().includes('firm') ||
-                                  inputValue.toLowerCase().includes('where to work') ||
-                                  inputValue.toLowerCase().includes('who hires');
+      const isCompaniesQuestion = currentInput.toLowerCase().includes('company') ||
+                                  currentInput.toLowerCase().includes('companies') ||
+                                  currentInput.toLowerCase().includes('employer') ||
+                                  currentInput.toLowerCase().includes('corporation') ||
+                                  currentInput.toLowerCase().includes('firm') ||
+                                  currentInput.toLowerCase().includes('where to work') ||
+                                  currentInput.toLowerCase().includes('who hires');
 
-      const isCertificationsQuestion = inputValue.toLowerCase().includes('certification') ||
-                                      inputValue.toLowerCase().includes('certificate') ||
-                                      inputValue.toLowerCase().includes('credential') ||
-                                      inputValue.toLowerCase().includes('qualified') ||
-                                      inputValue.toLowerCase().includes('qualify') ||
-                                      inputValue.toLowerCase().includes('qualification');
+      const isCertificationsQuestion = currentInput.toLowerCase().includes('certification') ||
+                                      currentInput.toLowerCase().includes('certificate') ||
+                                      currentInput.toLowerCase().includes('credential') ||
+                                      currentInput.toLowerCase().includes('qualified') ||
+                                      currentInput.toLowerCase().includes('qualify') ||
+                                      currentInput.toLowerCase().includes('qualification');
 
       // Handle specific questions about careers
       if (conversationState === ConversationState.DISCUSS_SPECIFIC_CAREER && 
@@ -728,7 +747,7 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
         
         // Check if the question mentions a specific career by name
         const careerMentions = suggestions.filter(career => 
-          inputValue.toLowerCase().includes(career.suggestedCareer.toLowerCase())
+          currentInput.toLowerCase().includes(career.suggestedCareer.toLowerCase())
         );
         
         if (careerMentions.length > 0) {
@@ -763,12 +782,12 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
         
         // If we're asking about multiple careers or general information
         const isAskingAboutAll = 
-          inputValue.toLowerCase().includes("all careers") || 
-          inputValue.toLowerCase().includes("all professions") || 
-          inputValue.toLowerCase().includes("each career") || 
-          inputValue.toLowerCase().includes("all of them") ||
-          inputValue.toLowerCase().includes("both careers") ||
-          inputValue.toLowerCase().includes("compare");
+          currentInput.toLowerCase().includes("all careers") || 
+          currentInput.toLowerCase().includes("all professions") || 
+          currentInput.toLowerCase().includes("each career") || 
+          currentInput.toLowerCase().includes("all of them") ||
+          currentInput.toLowerCase().includes("both careers") ||
+          currentInput.toLowerCase().includes("compare");
         
         if (isAskingAboutAll && discussedCareers.length > 0) {
           // User wants info about all careers they've seen roadmaps for
@@ -961,9 +980,9 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
 
       // Check if the message is unclear or confusing
       const isUnclearMessage = 
-        inputValue.length < 3 || 
-        (inputValue.toLowerCase() !== 'yes' && 
-         inputValue.toLowerCase() !== 'no' && 
+        currentInput.length < 3 || 
+        (currentInput.toLowerCase() !== 'yes' && 
+         currentInput.toLowerCase() !== 'no' && 
          !isRoadmapQuestion && 
          !isSalaryQuestion && 
          !isSkillsQuestion && 
@@ -977,7 +996,7 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
       if (isUnclearMessage) {
         const clarificationMessage: Message = {
           id: Date.now().toString(),
-          content: "I'm not sure I understood what you're asking. Could you rephrase your question? You can ask about roadmaps, skills, salary, job roles, market trends, companies, or certifications for any of the careers we discussed.",
+          content: "I'm not sure I understood what you're asking. Please enter your preference or rephrase your question. You can ask about roadmaps, skills, salary, job roles, market trends, companies, or certifications for any of the careers we discussed.",
           role: 'assistant',
           timestamp: new Date()
         };
@@ -1009,7 +1028,8 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
       }
       
       if (careerSuggestions.length > 0) {
-        const response = `Based on your skills${selectedHobbies.length > 0 ? ' and interests' : ''}, here are some career suggestions: ✨\n\n${careerSuggestions.map((career, index) => `${index + 1}. ${career.suggestedCareer}`).join('\n')}\n\n🔍 Would you like to know more about any of these careers? Just type the number or the name of the career you're interested in.`;
+        // Use the improved response function
+        const response = generateCareerSuggestionsResponse(careerSuggestions);
         const newAssistantMessage: Message = {
           id: Date.now().toString(),
           content: response,
@@ -1054,6 +1074,11 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
     setSelectedSkills([]);
     setSelectedHobbies([]);
     setConversationState(ConversationState.GREETING);
+    setIsChatComplete(false);
+    setDiscussedCareers([]);
+    setPendingCareers([]);
+    setCurrentCareerIndex(0);
+    setShowDetailedRoadmap(false);
   };
 
   // Add these helper functions for roadmap templates
@@ -1390,135 +1415,164 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
   }
 
   return (
-    <div className="flex flex-col h-screen max-w-4xl mx-auto p-4">
-      <div className="flex-1 bg-white rounded-lg shadow-lg flex flex-col">
-        <div className="bg-blue-600 text-white py-3 px-4 rounded-t-lg flex items-center">
-          <div className="text-xl font-bold">CareerAI</div>
-          <div className="ml-2 text-sm bg-blue-500 px-2 py-1 rounded-full">Career Guidance Bot</div>
-          <div className="ml-auto flex space-x-2">
-            <div className="h-3 w-3 rounded-full bg-green-400"></div>
-            <div className="text-xs">Online</div>
+    <div className="relative min-h-screen bg-gray-50">
+      <button 
+        onClick={() => window.location.href = '/dashboard'} 
+        className="fixed top-4 left-4 md:left-8 lg:left-12 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg shadow-md transition-all duration-300 flex items-center group overflow-hidden relative"
+        aria-label="Back to dashboard"
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-gray-100 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 relative z-10 group-hover:-translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span className="relative z-10 group-hover:translate-x-1 transition-transform duration-300">Back</span>
+      </button>
+      
+      <div className="flex flex-col h-screen max-w-4xl mx-auto p-4">
+        <div className="flex-1 bg-white rounded-lg shadow-lg flex flex-col">
+          <div className="bg-blue-600 text-white py-3 px-4 rounded-t-lg flex items-center">
+            <div className="text-xl font-bold">CareerAI</div>
+            <div className="ml-2 text-sm bg-blue-500 px-2 py-1 rounded-full">Career Guidance Bot</div>
+            <div className="ml-auto flex space-x-2">
+              <div className="h-3 w-3 rounded-full bg-green-400"></div>
+              <div className="text-xs">Online</div>
+            </div>
           </div>
-        </div>
-        <div className="flex-1 overflow-y-auto p-4">
-          <div className="space-y-4">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`flex ${
-                  msg.role === 'user' ? 'justify-end' : 'justify-start'
-                }`}
-              >
+          <div className="flex-1 overflow-y-auto p-4">
+            <div className="space-y-4">
+              {messages.map((msg, index) => (
                 <div
-                  className={`max-w-[80%] rounded-lg p-3 ${
-                    msg.role === 'user'
-                      ? 'bg-blue-500 text-white rounded-br-none'
-                      : 'bg-gray-100 text-gray-800 rounded-bl-none'
+                  key={index}
+                  className={`flex ${
+                    msg.role === 'user' ? 'justify-end' : 'justify-start'
                   }`}
                 >
-                  <div 
-                    className="text-base" /* Increased font size */
-                    dangerouslySetInnerHTML={{ __html: formatMessage(msg.content) }}
-                  />
-                  <p className="text-xs opacity-70 mt-1">
-                    {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </p>
+                  <div
+                    className={`max-w-[80%] rounded-lg p-3 ${
+                      msg.role === 'user'
+                        ? 'bg-blue-500 text-white rounded-br-none'
+                        : 'bg-gray-100 text-gray-800 rounded-bl-none'
+                    }`}
+                  >
+                    <div 
+                      className="text-base" /* Increased font size */
+                      dangerouslySetInnerHTML={{ __html: formatMessage(msg.content) }}
+                    />
+                    <p className="text-xs opacity-70 mt-1">
+                      {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-            {messages[messages.length - 1]?.showControls && (
-              <div className="mb-4 space-y-4">
-                <div className="relative z-20">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    🧠 Select your skills (select as many as you want):
-                  </label>
-                  <Select
-                    isMulti
-                    options={availableSkills}
-                    value={selectedSkills}
-                    onChange={handleSkillChange}
-                    placeholder="Select your skills..."
-                    className="w-full"
-                  />
-                </div>
+              ))}
+              {messages[messages.length - 1]?.showControls && (
+                <div className="mb-4 space-y-4">
+                  <div className="relative z-20">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      🧠 Select your skills (select as many as you want):
+                    </label>
+                    <Select
+                      isMulti
+                      options={availableSkills}
+                      value={selectedSkills}
+                      onChange={handleSkillChange}
+                      placeholder="Select your skills..."
+                      className="w-full"
+                    />
+                  </div>
 
-                <div className="relative z-10">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    🎯 Select your interests/hobbies (maximum 2, favorite first):
-                  </label>
-                  <Select
-                    isMulti
-                    options={availableHobbies}
-                    value={selectedHobbies}
-                    onChange={handleHobbyChange}
-                    placeholder="Select your hobbies (max 2)..."
-                    className="w-full"
-                    isDisabled={selectedSkills.length === 0}
-                  />
-                  {selectedHobbies.length === 2 && (
-                    <p className="text-xs text-amber-600 mt-1">Maximum 2 hobbies allowed. Your first selection is given higher priority.</p>
-                  )}
-                </div>
+                  <div className="relative z-10">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      🎯 Select your interests/hobbies (maximum 2, favorite first):
+                    </label>
+                    <Select
+                      isMulti
+                      options={availableHobbies}
+                      value={selectedHobbies}
+                      onChange={handleHobbyChange}
+                      placeholder="Select your hobbies (max 2)..."
+                      className="w-full"
+                      isDisabled={selectedSkills.length === 0}
+                    />
+                    {selectedHobbies.length === 2 && (
+                      <p className="text-xs text-amber-600 mt-1">Maximum 2 hobbies allowed. Your first selection is given higher priority.</p>
+                    )}
+                  </div>
 
-                <Button 
-                  onClick={handleSelectionSubmit}
-                  disabled={selectedSkills.length === 0 && selectedHobbies.length === 0}
-                  aria-label="Submit skills and hobbies"
-                  className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 text-base"
+                  <Button 
+                    onClick={handleSelectionSubmit}
+                    disabled={selectedSkills.length === 0 && selectedHobbies.length === 0}
+                    aria-label="Submit skills and hobbies"
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 text-base"
+                  >
+                    🚀 Get Career Suggestions
+                  </Button>
+                </div>
+              )}
+            </div>
+            <div ref={messagesEndRef} />
+          </div>
+
+          <div className="border-t p-4 bg-white sticky bottom-0 z-30 shadow-md">
+            <div className="flex items-center space-x-2">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder={isChatComplete ? "Chat completed. Choose an option below." : "Type your message here..."}
+                className={`flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base ${
+                  isChatComplete ? 'bg-gray-100 cursor-not-allowed' : ''
+                }`}
+                disabled={isChatComplete}
+              />
+              <button
+                onClick={handleMessageSubmit}
+                className={`p-3 rounded-lg transition-colors ${
+                  isChatComplete 
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-blue-500 text-white hover:bg-blue-600'
+                }`}
+                aria-label="Send message"
+                disabled={isChatComplete}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
                 >
-                  🚀 Get Career Suggestions
-                </Button>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                  />
+                </svg>
+              </button>
+            </div>
+            {isChatComplete && (
+              <div className="mt-4 flex space-x-4">
+                <button 
+                  onClick={handleReset} 
+                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center"
+                >
+                  <RefreshCw className="h-5 w-5 mr-2" />
+                  Restart Conversation
+                </button>
+                <button 
+                  onClick={() => window.location.href = '/dashboard'} 
+                  className="flex-1 bg-gray-800 hover:bg-gray-900 text-white py-3 px-4 rounded-lg flex items-center justify-center"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                  Go to Dashboard
+                </button>
               </div>
             )}
           </div>
-          <div ref={messagesEndRef} />
-        </div>
-
-        <div className="border-t p-4 bg-white sticky bottom-0 z-30 shadow-md">
-          <div className="flex items-center space-x-2">
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder={isChatComplete ? "Chat completed. Refresh page to start a new conversation." : "Type your message here..."}
-              className={`flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base ${
-                isChatComplete ? 'bg-gray-100 cursor-not-allowed' : ''
-              }`}
-              disabled={isChatComplete}
-            />
-            <button
-              onClick={handleMessageSubmit}
-              className={`p-3 rounded-lg transition-colors ${
-                isChatComplete 
-                ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-blue-500 text-white hover:bg-blue-600'
-              }`}
-              aria-label="Send message"
-              disabled={isChatComplete}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                />
-              </svg>
-            </button>
-          </div>
-          {isChatComplete && (
-            <div className="absolute -top-8 left-0 right-0 text-center">
-              <p className="text-sm text-gray-500">Refresh the page to start a new conversation</p>
-            </div>
-          )}
         </div>
       </div>
     </div>
