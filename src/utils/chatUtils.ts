@@ -1,4 +1,3 @@
-
 // Utility functions for the chat component
 
 /**
@@ -6,8 +5,12 @@
  * Simple version - for a real app, use a proper markdown parser
  */
 export const formatMessage = (message: string): string => {
+  // Replace markdown headers with styled HTML headers
+  let formattedText = message.replace(/^# (.*?)$/gm, '<h1 class="text-2xl font-bold mb-3">$1</h1>');
+  formattedText = formattedText.replace(/^## (.*?)$/gm, '<h2 class="text-xl font-bold mb-2">$1</h2>');
+  
   // Replace **text** with <strong>text</strong>
-  let formattedText = message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   
   // Replace *text* with <em>text</em>
   formattedText = formattedText.replace(/\*(.*?)\*/g, '<em>$1</em>');

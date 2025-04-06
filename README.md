@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CareerAI - Career Guidance and Resume Builder
 
 A modern web application that helps users build professional resumes and receive career guidance using AI-powered insights.
@@ -99,3 +100,6 @@ CareerAI/
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+=======
+# Career-Ai
+>>>>>>> 2737bf4d037209b9e4a1fbc29326d58217e75e8c

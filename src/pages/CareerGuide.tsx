@@ -1,8 +1,22 @@
-
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import FadeIn from '@/components/animations/FadeIn';
 import NavBar from '@/components/NavBar';
+import { Send, RefreshCw } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { formatMessage } from '@/utils/chatUtils';
+import { 
+  useCareerGuidanceData, 
+  extractUniqueSkills,
+  extractUniqueHobbies,
+  getCareerSuggestionsBySelectedSkills,
+  CareerGuidanceEntry,
+  ConversationState
+} from '@/utils/careerGuidanceUtils';
+import { Select, SelectOption } from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { generateAICareerDescription, generateCareerRoadmap } from '@/utils/aiService';
 
 // Mock authentication check - will be replaced with actual auth later
 const useAuth = () => {
@@ -10,32 +24,1503 @@ const useAuth = () => {
   return { isLoggedIn };
 };
 
+interface Message {
+  id: string;
+  content: string;
+  role: 'user' | 'assistant';
+  timestamp: Date;
+  showControls?: boolean;
+}
+
+const initialMessages: Message[] = [
+  {
+    id: '1',
+    content: "👋 Hi, I am CareerAI! I'm here to help you find your perfect career path. To get started, may I know your name?",
+    role: 'assistant',
+    timestamp: new Date(),
+  },
+];
+
 const CareerGuide = () => {
   const { isLoggedIn } = useAuth();
+  const { data: careerData, isLoading: isDataLoading, error: dataError } = useCareerGuidanceData();
+
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedSkills, setSelectedSkills] = useState<SelectOption[]>([]);
+  const [selectedHobbies, setSelectedHobbies] = useState<SelectOption[]>([]);
+  const [userName, setUserName] = useState<string>('');
+  const [conversationState, setConversationState] = useState<ConversationState>(ConversationState.GREETING);
+  const [isChatComplete, setIsChatComplete] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [availableSkills, setAvailableSkills] = useState<SelectOption[]>([]);
+  const [availableHobbies, setAvailableHobbies] = useState<SelectOption[]>([]);
+  const [selectedCareerIds, setSelectedCareerIds] = useState<number[]>([]);
+  const [currentCareerIndex, setCurrentCareerIndex] = useState<number>(0);
+  const [pendingCareers, setPendingCareers] = useState<CareerGuidanceEntry[]>([]);
+  const [showDetailedRoadmap, setShowDetailedRoadmap] = useState<boolean>(false);
+  const [discussedCareers, setDiscussedCareers] = useState<CareerGuidanceEntry[]>([]);
+
+  // Get the current skill and hobby values
+  const getCurrentSkillValues = () => selectedSkills.map(s => s.value);
+  const getCurrentHobbyValues = () => selectedHobbies.map(h => h.value);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  useEffect(() => {
+    const skills = extractUniqueSkills(careerData).map(skill => ({
+      value: skill,
+      label: skill
+    }));
+    setAvailableSkills(skills);
+  }, [careerData]);
+
+  useEffect(() => {
+    if (selectedSkills.length > 0) {
+      const hobbies = extractUniqueHobbies(careerData).map(hobby => ({
+        value: hobby,
+        label: hobby
+      }));
+      
+      // Filter out any existing "Others" option
+      const filteredHobbies = hobbies.filter(hobby => hobby.value !== 'Others');
+      
+      // Add a single "Others" option at the end
+      const hobbiesWithOthers = [
+        ...filteredHobbies,
+        { value: 'Others', label: 'Others' }
+      ];
+      
+      setAvailableHobbies(hobbiesWithOthers);
+    } else {
+      setAvailableHobbies([]);
+    }
+  }, [selectedSkills, careerData]);
+
+  // Handle skill selection from the MultiSelect component
+  const handleSkillChange = (newValue: SelectOption[]) => {
+    setSelectedSkills(newValue);
+  };
+
+  // Handle hobby selection from the MultiSelect component
+  const handleHobbyChange = (newValue: SelectOption[]) => {
+    // Limit to only 2 hobbies
+    if (newValue.length <= 2) {
+      setSelectedHobbies(newValue);
+    } else {
+      // Keep only the first 2
+      setSelectedHobbies(newValue.slice(0, 2));
+    }
+  };
+
+  // Handle the submission of selected skills and hobbies
+  const handleSelectionSubmit = async () => {
+    const skillValues = selectedSkills.map(s => s.value);
+    const hobbyValues = selectedHobbies.map(h => h.value);
+    const hasOthersHobby = hobbyValues.includes('Others');
+
+    let userMessage = '';
+    if (skillValues.length > 0 && hobbyValues.length > 0) {
+      if (hobbyValues.length === 2) {
+        userMessage = `I have skills in ${skillValues.join(', ')} and I enjoy ${hobbyValues[0]} most, followed by ${hobbyValues[1]}. What careers would suit me?`;
+      } else {
+        userMessage = `I have skills in ${skillValues.join(', ')} and I enjoy ${hobbyValues.join(', ')}. What careers would suit me?`;
+      }
+    } else if (skillValues.length > 0) {
+      userMessage = `I have skills in ${skillValues.join(', ')}. What careers would suit me?`;
+    } else if (hobbyValues.length > 0) {
+      userMessage = `I enjoy ${hobbyValues.join(', ')}. What careers would suit me?`;
+    }
+
+    if (userMessage) {
+      const newUserMessage: Message = {
+        id: Date.now().toString(),
+        content: userMessage,
+        role: 'user',
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, newUserMessage]);
+      setIsLoading(true);
+
+      // Simulate processing time
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // If "Others" is selected among hobbies, prioritize just the skills
+      let suggestions;
+      if (hasOthersHobby) {
+        suggestions = getCareerSuggestionsBySelectedSkills(careerData, skillValues, []);
+      } else {
+        suggestions = getCareerSuggestionsBySelectedSkills(careerData, skillValues, hobbyValues);
+        
+        // If no results found with both skills and hobbies, fall back to just skills
+        if (suggestions.length === 0 && skillValues.length > 0) {
+          suggestions = getCareerSuggestionsBySelectedSkills(careerData, skillValues, []);
+        }
+      }
+      
+      if (suggestions.length > 0) {
+        const response = `✨ Based on your skills${hobbyValues.length > 0 ? ' and interests' : ''}, here are some career suggestions:\n\n${suggestions.map((career, index) => `${index + 1}. ${career.suggestedCareer}`).join('\n')}\n\n🔍 Would you like to know more about any of these careers? Just type the number.`;
+        const newAssistantMessage: Message = {
+          id: Date.now().toString(),
+          content: response,
+          role: 'assistant',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, newAssistantMessage]);
+      } else {
+        const noMatchMessage: Message = {
+          id: Date.now().toString(),
+          content: '😕 I couldn\'t find any specific career matches. Could you try selecting different skills or hobbies?',
+          role: 'assistant',
+          timestamp: new Date(),
+          showControls: true
+        };
+        setMessages(prev => [...prev, noMatchMessage]);
+      }
+
+      setIsLoading(false);
+    }
+  };
+
+  // Generate a compact overview of a career (basic information)
+  const generateCareerBasicInfo = (career: CareerGuidanceEntry): string => {
+    return `**${career.suggestedCareer}**
+
+**🔍 Career Overview:**
+${career.suggestedCareer} combines ${career.skill} with interests in ${career.hobby}.
+
+**💰 Salary Range:** ${career.salaryRange}
+
+**🔧 Key Skills Required:**
+- Technical expertise in ${career.skill}
+- Problem-solving and analytical thinking
+- Communication and collaboration
+- Adaptability to changing technologies
+
+**🏢 Top Companies:**
+- ${getTopCompaniesForCareer(career.suggestedCareer).join('\n- ')}
+
+**🌐 Market Trend:** 
+The demand for ${career.suggestedCareer}s is ${Math.random() > 0.3 ? 'growing' : 'stable'} in the current job market, with opportunities in technology, healthcare, finance, and entertainment sectors.
+
+**📈 Job Opportunities:**
+- Entry-level: Junior positions requiring 0-2 years experience
+- Mid-level: Roles requiring 2-5 years of specialized experience
+- Senior-level: Leadership positions after 5+ years of experience`;
+  };
+
+  // Helper function to get top companies based on career type
+  const getTopCompaniesForCareer = (careerName: string): string[] => {
+    const careerLower = careerName.toLowerCase();
+    
+    // Default companies for tech roles
+    let companies = ['Google', 'Microsoft', 'Amazon', 'Apple', 'Meta'];
+    
+    if (careerLower.includes('game') || careerLower.includes('gaming')) {
+      companies = ['Electronic Arts', 'Ubisoft', 'Activision Blizzard', 'Epic Games', 'Unity Technologies'];
+    } 
+    else if (careerLower.includes('data') || careerLower.includes('analyst')) {
+      companies = ['Google', 'IBM', 'Microsoft', 'Amazon AWS', 'Palantir Technologies'];
+    }
+    else if (careerLower.includes('research') || careerLower.includes('scientist')) {
+      companies = ['IBM Research', 'Google DeepMind', 'Microsoft Research', 'Meta AI Research', 'OpenAI'];
+    }
+    else if (careerLower.includes('finance') || careerLower.includes('quant')) {
+      companies = ['JPMorgan Chase', 'Goldman Sachs', 'Bloomberg', 'Two Sigma', 'Citadel'];
+    }
+    else if (careerLower.includes('healthcare') || careerLower.includes('medical')) {
+      companies = ['Philips Healthcare', 'Siemens Healthineers', 'GE Healthcare', 'Johnson & Johnson', 'Medtronic'];
+    }
+    else if (careerLower.includes('web') || careerLower.includes('frontend') || careerLower.includes('backend')) {
+      companies = ['Google', 'Meta', 'Shopify', 'Stripe', 'Vercel'];
+    }
+    else if (careerLower.includes('mobile') || careerLower.includes('app')) {
+      companies = ['Apple', 'Google', 'Uber', 'Spotify', 'Microsoft'];
+    }
+    else if (careerLower.includes('design') || careerLower.includes('ui') || careerLower.includes('ux')) {
+      companies = ['Apple', 'Airbnb', 'Adobe', 'Google', 'Figma'];
+    }
+    else if (careerLower.includes('security') || careerLower.includes('cyber')) {
+      companies = ['CrowdStrike', 'Palo Alto Networks', 'Microsoft', 'Google', 'Cisco'];
+    }
+    else if (careerLower.includes('cloud') || careerLower.includes('devops')) {
+      companies = ['Amazon AWS', 'Microsoft Azure', 'Google Cloud', 'IBM Cloud', 'Cloudflare'];
+    }
+    else if (careerLower.includes('audio') || careerLower.includes('sound')) {
+      companies = ['Spotify', 'Dolby Laboratories', 'Apple', 'Sonos', 'Bose'];
+    }
+    else if (careerLower.includes('sport')) {
+      companies = ['Nike', 'ESPN', 'Strava', 'Under Armour', 'Peloton'];
+    }
+    
+    return companies;
+  };
+
+  // Helper function to get top certifications for a career
+  const getTopCertificationsForCareer = (careerName: string): string[] => {
+    const careerLower = careerName.toLowerCase();
+    
+    // Default certifications for tech roles
+    let certifications = ['CompTIA A+', 'AWS Certified Solutions Architect', 'Microsoft Certified: Azure Fundamentals', 'Google Certified Professional', 'Certified Information Systems Security Professional (CISSP)'];
+    
+    if (careerLower.includes('game') || careerLower.includes('gaming')) {
+      certifications = ['Unity Certified Developer', 'Unreal Engine Certification', 'C++ Certification', 'Game Design and Development Certificate', 'NVIDIA Certified Developer'];
+    } 
+    else if (careerLower.includes('data') || careerLower.includes('analyst')) {
+      certifications = ['Google Data Analytics Certificate', 'Microsoft Certified: Data Analyst Associate', 'IBM Data Science Professional Certificate', 'Certified Analytics Professional (CAP)', 'Cloudera Certified Associate: Data Analyst'];
+    }
+    else if (careerLower.includes('research') || careerLower.includes('scientist')) {
+      certifications = ['Google Professional Machine Learning Engineer', 'AWS Certified Machine Learning - Specialty', 'Microsoft Certified: Azure Data Scientist Associate', 'IBM AI Engineering Professional Certificate', 'TensorFlow Developer Certificate'];
+    }
+    else if (careerLower.includes('finance') || careerLower.includes('quant')) {
+      certifications = ['Financial Risk Manager (FRM)', 'Chartered Financial Analyst (CFA)', 'Certificate in Quantitative Finance (CQF)', 'Professional Risk Manager (PRM)', 'Financial Modeling & Valuation Analyst (FMVA)'];
+    }
+    else if (careerLower.includes('healthcare') || careerLower.includes('medical')) {
+      certifications = ['Healthcare Information and Management Systems Society (HIMSS) Certification', 'Certified Professional in Healthcare Information and Management Systems (CPHIMS)', 'Certified Associate in Healthcare Information and Management Systems (CAHIMS)', 'HL7 Certification', 'Epic Certification'];
+    }
+    else if (careerLower.includes('web') || careerLower.includes('frontend') || careerLower.includes('backend')) {
+      certifications = ['AWS Certified Developer', 'Microsoft Certified: Azure Developer Associate', 'Google Professional Cloud Developer', 'Meta Front-End Developer Certificate', 'W3Schools Certified Web Developer'];
+    }
+    else if (careerLower.includes('mobile') || careerLower.includes('app')) {
+      certifications = ['iOS App Development with Swift Certification', 'Android Certified Application Developer', 'React Native Certification', 'Flutter Development Bootcamp', 'AWS Mobile Developer Certification'];
+    }
+    else if (careerLower.includes('design') || careerLower.includes('ui') || careerLower.includes('ux')) {
+      certifications = ['Google UX Design Certificate', 'Adobe Certified Expert (ACE)', 'Certified User Experience Professional (CUXP)', 'Interaction Design Foundation Certification', 'Figma Certification'];
+    }
+    else if (careerLower.includes('security') || careerLower.includes('cyber')) {
+      certifications = ['Certified Information Systems Security Professional (CISSP)', 'Certified Ethical Hacker (CEH)', 'CompTIA Security+', 'Certified Information Security Manager (CISM)', 'GIAC Security Essentials (GSEC)'];
+    }
+    else if (careerLower.includes('cloud') || careerLower.includes('devops')) {
+      certifications = ['AWS Certified DevOps Engineer', 'Microsoft Certified: DevOps Engineer Expert', 'Google Professional Cloud DevOps Engineer', 'Docker Certified Associate', 'Kubernetes Certification (CKA)'];
+    }
+    else if (careerLower.includes('audio') || careerLower.includes('sound')) {
+      certifications = ['Avid Pro Tools Certification', 'Apple Logic Pro X Certification', 'Dante Certification', 'Audiokinetic Wwise Certification', 'Audio Engineering Society (AES) Certification'];
+    }
+    else if (careerLower.includes('sport')) {
+      certifications = ['NSCA Certified Strength and Conditioning Specialist', 'Sports Analytics Certification', 'Sports Science Certification', 'Sports Technology Management Certificate', 'Sports Data Analytics Certification'];
+    }
+    
+    return certifications;
+  };
+
+  // Generate a response message based on career suggestions
+  const generateCareerSuggestionsResponse = (suggestions: CareerGuidanceEntry[]): string => {
+    if (suggestions.length === 0) {
+      return `I couldn't find specific career matches based on what you selected, ${userName}. Could you try selecting different skills or hobbies? 😕`;
+    }
+    
+    let response = `Based on your skills and interests, ${userName}, here are some career paths you might consider: ✨\n\n`;
+    
+    suggestions.forEach((suggestion, index) => {
+      response += `**${index + 1}. ${suggestion.suggestedCareer}**\n`;
+      response += `- 💰 Salary Range: ${suggestion.salaryRange}\n`;
+    });
+    
+    response += "\n🔍 Which of these careers would you like to know more about? You can select one or more by typing their names or numbers (separated by commas if selecting multiple).";
+    
+    return response;
+  };
+
+  // Generate comprehensive detailed information about a specific career
+  const generateCareerDetailResponse = (career: CareerGuidanceEntry): string => {
+    return `# ${career.suggestedCareer}
+
+📋 Career Overview
+${career.suggestedCareer} is a profession that combines skills in ${career.skill} with interests related to ${career.hobby}. This career path allows professionals to apply technical expertise in creative and practical ways that align with their personal interests.
+
+💰 Compensation & Benefits
+- **Salary Range:** ${career.salaryRange}
+- **Work-Life Balance:** Most positions offer flexible hours and remote work possibilities
+- **Growth Potential:** High demand across various industries with opportunities for advancement
+
+🔧 Required Skills
+- Strong foundation in ${career.skill}
+- Technical expertise in industry-standard tools and technologies
+- Problem-solving abilities and analytical thinking
+- Communication and collaboration skills
+- Adaptability to changing technologies and requirements
+
+🎓 Educational Path
+- Bachelor's degree in ${career.skill} or related field (recommended)
+- Specialized certifications can boost employability
+- Continuous learning through workshops and online courses
+- Portfolio development showcasing practical applications
+
+🗺️ Career Roadmap
+${career.careerRoadmap}
+
+🌐 Industry Outlook
+The demand for ${career.suggestedCareer}s is growing rapidly as organizations continue to prioritize ${career.skill.toLowerCase()} capabilities. The field offers opportunities in various sectors including technology, healthcare, finance, entertainment, and more.
+
+🚀 Day-to-Day Responsibilities
+- Collaborating with cross-functional teams
+- Designing and implementing solutions
+- Testing and validating work
+- Staying updated on industry trends and best practices
+- Communicating progress and results to stakeholders
+
+💡 Would you like to know more about this career path or explore other options that match your skills and interests?`;
+  };
+
+  // Handle the message submission with the updated logic
+  const handleMessageSubmit = async () => {
+    if (inputValue.trim()) {
+      const userMessage: Message = {
+        id: Date.now().toString(),
+        content: inputValue.trim(),
+        role: 'user',
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, userMessage]);
+      setInputValue('');
+      setIsLoading(true);
+
+      // Handle name input in greeting state
+      if (conversationState === ConversationState.GREETING) {
+        setUserName(inputValue.trim());
+        const welcomeMessage: Message = {
+          id: Date.now().toString(),
+          content: `Nice to meet you, ${inputValue.trim()}! Let's find the perfect career path for you.\n\n👇 Please select your skills and up to 2 hobbies below. Select your favorite hobby first for better recommendations!`,
+          role: 'assistant',
+          timestamp: new Date(),
+          showControls: true
+        };
+        setMessages(prev => [...prev, welcomeMessage]);
+        setConversationState(ConversationState.ASK_SKILLS);
+        setIsLoading(false);
+        return;
+      }
+
+      // Get current career suggestions based on selected skills and hobbies
+      const suggestions = getCareerSuggestionsBySelectedSkills(
+        careerData, 
+        selectedSkills.map(s => s.value), 
+        selectedHobbies.map(h => h.value)
+      );
+
+      // Check for goodbye message first, before any other processing
+      const isGoodbyeMessage = inputValue.toLowerCase().includes('bye') ||
+                              inputValue.toLowerCase().includes('thank') ||
+                              inputValue.toLowerCase().includes('thats it') ||
+                              inputValue.toLowerCase().includes("that's it") ||
+                              inputValue.toLowerCase().includes('goodbye') ||
+                              inputValue.toLowerCase().includes('see you');
+
+      if (isGoodbyeMessage) {
+        const goodbyeMessage: Message = {
+          id: Date.now().toString(),
+          content: `👋 Thank you for using CareerAI! I wish you the very best in your career journey. Remember, every great career starts with a single step, and you're already on your way! If you need guidance in the future, don't hesitate to come back. Good luck! 🌟`,
+          role: 'assistant',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, goodbyeMessage]);
+        setIsChatComplete(true);
+        setIsLoading(false);
+        return;
+      }
+
+      // Process career selections when in suggestion state
+      if (conversationState === ConversationState.SUGGEST_CAREERS) {
+        // We already added the user message in the parent function, so don't add it again
+        
+        // Add loading message immediately
+        const loadingMessage: Message = {
+          id: Date.now().toString(),
+          content: "🔍 Analyzing your career selections...",
+          role: 'assistant',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, loadingMessage]);
+
+        // Extract all numbers using regex and parse them
+        // This approach handles comma-separated (1,2,3), space-separated (1 2 3), and mixed formats (1, 2 3)
+        const numberMatches = inputValue.match(/\d+/g) || [];
+        
+        // Convert to integers and filter valid selections
+        const validSelections = numberMatches
+          .map(num => parseInt(num))
+          .filter(num => !isNaN(num) && num > 0 && num <= suggestions.length);
+        
+        // Deduplicate selections using Set
+        const uniqueSelections = [...new Set(validSelections)];
+        
+        // Map to career objects
+        const selectedCareers: CareerGuidanceEntry[] = uniqueSelections
+          .map(num => suggestions[num - 1])
+          .filter(career => career !== undefined);
+
+        console.log("Input:", inputValue);
+        console.log("Extracted numbers:", numberMatches);
+        console.log("Valid selections:", validSelections);
+        console.log("Selected careers:", selectedCareers.map(c => c.suggestedCareer));
+
+        // Add artificial delay before showing results
+        setTimeout(() => {
+          if (selectedCareers.length > 0) {
+            // Show basic information for all selected careers first
+            const allCareersBasicInfo = selectedCareers.map((career, index) => {
+              return `**Career ${index + 1}: ${career.suggestedCareer}**\n\n${generateCareerBasicInfo(career)}`;
+            }).join('\n\n---\n\n');
+            
+            const basicInfoMessage: Message = {
+              id: Date.now().toString(),
+              content: `You've selected ${selectedCareers.length} career${selectedCareers.length > 1 ? 's' : ''}. Here's an overview of each:\n\n${allCareersBasicInfo}\n\n💡 Let's explore these careers in detail. Would you like to see the career roadmap for ${selectedCareers[0].suggestedCareer}? (Type 'yes' to view the roadmap, or 'no' to skip to the next career)`,
+              role: 'assistant',
+              timestamp: new Date()
+            };
+            
+            setMessages(prev => prev.slice(0, -1).concat([basicInfoMessage]));
+            setPendingCareers(selectedCareers);
+            setCurrentCareerIndex(0);
+            setShowDetailedRoadmap(false);
+            setConversationState(ConversationState.DISCUSS_SPECIFIC_CAREER);
+          } else {
+            // No valid career selections found
+            const invalidSelectionMessage: Message = {
+              id: Date.now().toString(),
+              content: "❓ I couldn't understand which careers you're interested in. Please type the numbers of the careers you'd like to learn more about (for example: 1, 2, 3 or 9 2 7).",
+              role: 'assistant',
+              timestamp: new Date()
+            };
+            setMessages(prev => prev.slice(0, -1).concat([invalidSelectionMessage]));
+          }
+          setIsLoading(false);
+          setInputValue('');
+        }, 4000); // 4-second delay
+
+        return;
+      }
+
+      // Check if we're in the discussion state with pending careers
+      if (pendingCareers.length > 0) {
+        // Check if this is a response about interest in current career's roadmap
+        const isInterestedResponse = 
+          inputValue.toLowerCase().includes('yes') || 
+          inputValue.toLowerCase().includes('yeah') ||
+          inputValue.toLowerCase().includes('sure') ||
+          inputValue.toLowerCase().includes('interested') ||
+          inputValue.toLowerCase().includes('tell me more') ||
+          inputValue.toLowerCase().includes('roadmap') || 
+          inputValue.toLowerCase().includes('path');
+
+        const isNotInterestedResponse = 
+          inputValue.toLowerCase().includes('no') || 
+          inputValue.toLowerCase().includes('nope') ||
+          inputValue.toLowerCase().includes('next') ||
+          inputValue.toLowerCase().includes('skip') ||
+          inputValue.toLowerCase().includes('not interested');
+
+        // Check if the response is neither yes nor no
+        const isInvalidResponse = !isInterestedResponse && !isNotInterestedResponse;
+
+        if (isInvalidResponse) {
+          // Handle invalid response
+          const errorMessage: Message = {
+            id: Date.now().toString(),
+            content: "❓ I couldn't understand your response. Please type 'yes' to view the roadmap, or 'no' to skip to the next career.",
+            role: 'assistant',
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, errorMessage]);
+          setIsLoading(false);
+          return;
+        }
+
+        if ((showDetailedRoadmap && (isInterestedResponse || isNotInterestedResponse)) || 
+            (!showDetailedRoadmap && (isInterestedResponse || isNotInterestedResponse))) {
+          // User is interested in the detailed roadmap
+          if (isInterestedResponse && !showDetailedRoadmap) {
+            setShowDetailedRoadmap(true);
+            
+            // User wants to see the roadmap, generate it
+            const currentCareer = pendingCareers[currentCareerIndex];
+            
+            // Multiple thinking messages that will be displayed sequentially
+            const thinkingMessages = [
+              "🔍 Analyzing career progression paths...",
+              "📊 Researching industry requirements for this role...",
+              "🧩 Compiling educational background and skills needed...",
+              "⚙️ Mapping out professional development stages...",
+              "📝 Finalizing detailed career roadmap..."
+            ];
+            
+            // Display first thinking message
+            const initialLoadingMessage: Message = {
+              id: Date.now().toString(),
+              content: thinkingMessages[0],
+              role: 'assistant',
+              timestamp: new Date()
+            };
+            setMessages(prev => [...prev, initialLoadingMessage]);
+            
+            // Cycle through thinking messages to create a more dynamic experience
+            let currentMessageIndex = 0;
+            const messageInterval = setInterval(() => {
+              currentMessageIndex = (currentMessageIndex + 1) % thinkingMessages.length;
+              const updatedLoadingMessage: Message = {
+                id: Date.now().toString(),
+                content: thinkingMessages[currentMessageIndex],
+                role: 'assistant',
+                timestamp: new Date()
+              };
+              setMessages(prev => [...prev.slice(0, -1), updatedLoadingMessage]);
+            }, 1400); // Change message every 1.4 seconds
+            
+            // Generate the roadmap content with delay
+            let roadmapContent = '';
+            setTimeout(async () => {
+              clearInterval(messageInterval); // Stop cycling messages
+              
+              try {
+                if (import.meta.env.VITE_OPENAI_API_KEY) {
+                  roadmapContent = await generateCareerRoadmap(currentCareer, userName);
+                } else {
+                  roadmapContent = generateDetailedRoadmapTemplate(currentCareer);
+                }
+              } catch (error) {
+                console.error("Error generating roadmap:", error);
+                roadmapContent = generateDetailedRoadmapTemplate(currentCareer);
+              }
+              
+              const roadmapMessage: Message = {
+                id: Date.now().toString(),
+                content: roadmapContent,
+                role: 'assistant',
+                timestamp: new Date()
+              };
+              
+              setMessages(prev => prev.slice(0, -1).concat([roadmapMessage]));
+              
+              // Add current career to discussed careers list
+              setDiscussedCareers(prev => {
+                // Avoid duplicates
+                if (!prev.some(c => c.suggestedCareer === currentCareer.suggestedCareer)) {
+                  return [...prev, currentCareer];
+                }
+                return prev;
+              });
+              
+              // If there are more careers to discuss
+              if (currentCareerIndex < pendingCareers.length - 1) {
+                const nextStepMessage: Message = {
+                  id: Date.now().toString(),
+                  content: `That's the roadmap for ${currentCareer.suggestedCareer}.\n\n💡 Would you like to see the career roadmap for ${pendingCareers[currentCareerIndex + 1].suggestedCareer}? (Type 'yes' to view the roadmap, or 'no' to skip to the next career)`,
+                  role: 'assistant',
+                  timestamp: new Date()
+                };
+                setMessages(prev => [...prev, nextStepMessage]);
+                setCurrentCareerIndex(currentCareerIndex + 1);
+                setShowDetailedRoadmap(false);
+              } else {
+                // We've gone through all careers
+                const completionMessage: Message = {
+                  id: Date.now().toString(),
+                  content: `That completes the information for all the careers you selected! Is there anything specific you'd like to know more about? You can ask about skills, salary, or other aspects of any career we discussed.`,
+                  role: 'assistant',
+                  timestamp: new Date()
+                };
+                setMessages(prev => [...prev, completionMessage]);
+                setPendingCareers([]);
+                setCurrentCareerIndex(0);
+                setShowDetailedRoadmap(false);
+              }
+            }, 7000); // 7-second delay for the entire process
+            
+            return;
+          } else if (isNotInterestedResponse || (showDetailedRoadmap && isInterestedResponse)) {
+            // User wants to skip to the next career
+            if (currentCareerIndex < pendingCareers.length - 1) {
+              // Move to the next career in the list
+              const nextCareer = pendingCareers[currentCareerIndex + 1];
+              
+              const nextCareerMessage: Message = {
+                id: Date.now().toString(),
+                content: `💡 Would you like to see the career roadmap for ${nextCareer.suggestedCareer}? (Type 'yes' to view the roadmap, or 'no' to skip to the next career)`,
+                role: 'assistant',
+                timestamp: new Date()
+              };
+              
+              setMessages(prev => [...prev, nextCareerMessage]);
+              setCurrentCareerIndex(currentCareerIndex + 1);
+              setShowDetailedRoadmap(false);
+            } else {
+              // We've gone through all careers
+              const completionMessage: Message = {
+                id: Date.now().toString(),
+                content: `That completes the overview of all careers! Feel free to ask any specific questions about skills, salary, or other aspects of any career we discussed.`,
+                role: 'assistant',
+                timestamp: new Date()
+              };
+              setMessages(prev => [...prev, completionMessage]);
+              setPendingCareers([]);
+              setCurrentCareerIndex(0);
+              setShowDetailedRoadmap(false);
+            }
+          }
+          
+          setIsLoading(false);
+          return;
+        }
+      }
+
+      // Check for follow-up questions about roadmap, salary, skills, etc.
+      const isRoadmapQuestion = inputValue.toLowerCase().includes('roadmap') || 
+                               inputValue.toLowerCase().includes('path') || 
+                               inputValue.toLowerCase().includes('steps');
+      
+      const isSalaryQuestion = inputValue.toLowerCase().includes('salary') || 
+                              inputValue.toLowerCase().includes('pay') || 
+                              inputValue.toLowerCase().includes('compensation') ||
+                              inputValue.toLowerCase().includes('money');
+      
+      const isSkillsQuestion = inputValue.toLowerCase().includes('skills') || 
+                              inputValue.toLowerCase().includes('requirements') || 
+                              inputValue.toLowerCase().includes('need to know');
+      
+      const isMoreDetailsRequest = inputValue.toLowerCase().includes('tell me more') || 
+                                  inputValue.toLowerCase().includes('more details') || 
+                                  inputValue.toLowerCase().includes('more information');
+
+      const isJobRolesQuestion = inputValue.toLowerCase().includes('job') ||
+                                inputValue.toLowerCase().includes('role') ||
+                                inputValue.includes('position') ||
+                                inputValue.includes('work') ||
+                                inputValue.includes('responsibilities');
+
+      const isMarketTrendQuestion = inputValue.toLowerCase().includes('market') ||
+                                   inputValue.toLowerCase().includes('trend') ||
+                                   inputValue.toLowerCase().includes('demand') ||
+                                   inputValue.toLowerCase().includes('future') ||
+                                   inputValue.toLowerCase().includes('growth') ||
+                                   inputValue.toLowerCase().includes('opportunity') ||
+                                   inputValue.toLowerCase().includes('industry');
+
+      const isCompaniesQuestion = inputValue.toLowerCase().includes('company') ||
+                                  inputValue.toLowerCase().includes('companies') ||
+                                  inputValue.toLowerCase().includes('employer') ||
+                                  inputValue.toLowerCase().includes('corporation') ||
+                                  inputValue.toLowerCase().includes('firm') ||
+                                  inputValue.toLowerCase().includes('where to work') ||
+                                  inputValue.toLowerCase().includes('who hires');
+
+      const isCertificationsQuestion = inputValue.toLowerCase().includes('certification') ||
+                                      inputValue.toLowerCase().includes('certificate') ||
+                                      inputValue.toLowerCase().includes('credential') ||
+                                      inputValue.toLowerCase().includes('qualified') ||
+                                      inputValue.toLowerCase().includes('qualify') ||
+                                      inputValue.toLowerCase().includes('qualification');
+
+      // Handle specific questions about careers
+      if (conversationState === ConversationState.DISCUSS_SPECIFIC_CAREER && 
+          (isRoadmapQuestion || isSalaryQuestion || isSkillsQuestion || isMoreDetailsRequest || 
+           isJobRolesQuestion || isMarketTrendQuestion || isCompaniesQuestion || isCertificationsQuestion)) {
+        
+        // We might be asking about a specific career by name
+        let specifiedCareerName = null;
+        
+        // Check if the question mentions a specific career by name
+        const careerMentions = suggestions.filter(career => 
+          inputValue.toLowerCase().includes(career.suggestedCareer.toLowerCase())
+        );
+        
+        if (careerMentions.length > 0) {
+          // If a specific career is mentioned, use that one
+          specifiedCareerName = careerMentions[0].suggestedCareer;
+        }
+        
+        // Find the most recently discussed career if no specific career is mentioned
+        let lastCareerMessage = null;
+        if (!specifiedCareerName) {
+          for (let i = messages.length - 1; i >= 0; i--) {
+            const message = messages[i];
+            if (message.role === 'assistant' && message.content.includes('# ')) {
+              const careerNameMatch = message.content.match(/# (.*?)(\n|$)/);
+              if (careerNameMatch && careerNameMatch[1]) {
+                lastCareerMessage = careerNameMatch[1].trim();
+                break;
+              }
+            } else if (message.role === 'assistant' && message.content.includes('**')) {
+              // Look for bold career titles too
+              const careerNameMatch = message.content.match(/\*\*(.*?)\*\*/);
+              if (careerNameMatch && careerNameMatch[1]) {
+                lastCareerMessage = careerNameMatch[1].trim();
+                break;
+              }
+            }
+          }
+        }
+        
+        // Determine which careers to provide information about
+        let careersToRespond: CareerGuidanceEntry[] = [];
+        
+        // If we're asking about multiple careers or general information
+        const isAskingAboutAll = 
+          inputValue.toLowerCase().includes("all careers") || 
+          inputValue.toLowerCase().includes("all professions") || 
+          inputValue.toLowerCase().includes("each career") || 
+          inputValue.toLowerCase().includes("all of them") ||
+          inputValue.toLowerCase().includes("both careers") ||
+          inputValue.toLowerCase().includes("compare");
+        
+        if (isAskingAboutAll && discussedCareers.length > 0) {
+          // User wants info about all careers they've seen roadmaps for
+          careersToRespond = [...discussedCareers];
+        } else if (specifiedCareerName) {
+          // User mentioned a specific career
+          const specifiedCareer = suggestions.find(c => 
+            c.suggestedCareer.toLowerCase() === specifiedCareerName.toLowerCase() ||
+            c.suggestedCareer.toLowerCase().includes(specifiedCareerName.toLowerCase())
+          );
+          if (specifiedCareer) {
+            careersToRespond = [specifiedCareer];
+          }
+        } else if (lastCareerMessage) {
+          // Use the most recently discussed career
+          const lastCareer = suggestions.find(c => 
+            c.suggestedCareer === lastCareerMessage || 
+            c.suggestedCareer.includes(lastCareerMessage) || 
+            lastCareerMessage.includes(c.suggestedCareer)
+          );
+          if (lastCareer) {
+            careersToRespond = [lastCareer];
+          }
+        } else if (discussedCareers.length > 0) {
+          // Default to the most recently discussed career if nothing else matches
+          careersToRespond = [discussedCareers[discussedCareers.length - 1]];
+        }
+        
+        if (careersToRespond.length > 0) {
+          // Check for multiple topics and prepare a combined response
+          const topics = [];
+          let combinedResponse = '';
+          
+          // First, collect all the topics the user is asking about
+          if (isRoadmapQuestion) topics.push('roadmap');
+          if (isSalaryQuestion) topics.push('salary');
+          if (isSkillsQuestion) topics.push('skills');
+          if (isJobRolesQuestion) topics.push('roles');
+          if (isMarketTrendQuestion) topics.push('trends');
+          if (isCompaniesQuestion) topics.push('companies');
+          if (isCertificationsQuestion) topics.push('certifications');
+          if (isMoreDetailsRequest && topics.length === 0) topics.push('details');
+          
+          // If we're comparing multiple careers
+          if (careersToRespond.length > 1) {
+            // Format a heading that shows we're comparing multiple careers
+            const careerNames = careersToRespond.map(c => c.suggestedCareer).join(', ');
+            combinedResponse = `**Information about ${topics.join(', ')} for ${careerNames}**\n\n`;
+            
+            // Generate responses for each career and topic
+            for (const career of careersToRespond) {
+              combinedResponse += `## ${career.suggestedCareer}\n\n`;
+              
+              for (const topic of topics) {
+                const topicResponse = generateTopicResponse(topic, career);
+                if (topicResponse) {
+                  combinedResponse += `${topicResponse}\n\n`;
+                }
+              }
+              
+              combinedResponse += `---\n\n`;
+            }
+            
+            // Send the combined response
+            const combinedMessage: Message = {
+              id: Date.now().toString(),
+              content: combinedResponse + "\n\n💡 Would you like more specific information about any of these careers?",
+              role: 'assistant',
+              timestamp: new Date()
+            };
+            
+            setMessages(prev => [...prev, combinedMessage]);
+            setIsLoading(false);
+            return;
+          } else {
+            // Single career response - use existing logic
+            const careerEntry = careersToRespond[0];
+            
+            // Add an intro if there are multiple topics
+            if (topics.length > 1) {
+              combinedResponse = `**Here's information about ${topics.join(', ')} for ${careerEntry.suggestedCareer}:**\n\n`;
+            }
+            
+            // Generate responses for each topic
+            for (const topic of topics) {
+              let topicResponse = '';
+              
+              if (topic === 'roadmap') {
+                // For roadmap, we'll handle differently since it needs async and loading messages
+                const loadingMessage: Message = {
+                  id: Date.now().toString(),
+                  content: "🔍 Generating detailed career roadmap...",
+                  role: 'assistant',
+                  timestamp: new Date()
+                };
+                setMessages(prev => [...prev, loadingMessage]);
+                
+                // We'll need to handle roadmap separately
+                try {
+                  if (import.meta.env.VITE_OPENAI_API_KEY) {
+                    const roadmapContent = await generateCareerRoadmap(careerEntry, userName);
+                    const roadmapMessage: Message = {
+                      id: Date.now().toString(),
+                      content: roadmapContent,
+                      role: 'assistant',
+                      timestamp: new Date()
+                    };
+                    setMessages(prev => prev.slice(0, -1).concat([roadmapMessage]));
+                  } else {
+                    const roadmapContent = generateDetailedRoadmapTemplate(careerEntry);
+                    const roadmapMessage: Message = {
+                      id: Date.now().toString(),
+                      content: roadmapContent,
+                      role: 'assistant',
+                      timestamp: new Date()
+                    };
+                    setMessages(prev => prev.slice(0, -1).concat([roadmapMessage]));
+                  }
+                } catch (error) {
+                  console.error("Error generating roadmap:", error);
+                  const roadmapContent = generateDetailedRoadmapTemplate(careerEntry);
+                  const roadmapMessage: Message = {
+                    id: Date.now().toString(),
+                    content: roadmapContent,
+                    role: 'assistant',
+                    timestamp: new Date()
+                  };
+                  setMessages(prev => prev.slice(0, -1).concat([roadmapMessage]));
+                }
+                
+                // Since we've handled roadmap separately, continue with other topics
+                continue;
+              } else {
+                topicResponse = generateTopicResponse(topic, careerEntry);
+              }
+              
+              if (topicResponse) {
+                if (combinedResponse) {
+                  combinedResponse += `\n\n${topicResponse}\n\n---\n\n`;
+                } else {
+                  combinedResponse = topicResponse;
+                }
+              }
+            }
+            
+            // Only send a combined message if we have content and didn't send individual messages for roadmap/details
+            if (combinedResponse && !topics.includes('roadmap') && !topics.includes('details')) {
+              combinedResponse += "\n\n💡 Would you like more information about any other aspect of this career?";
+              
+              const combinedMessage: Message = {
+                id: Date.now().toString(),
+                content: combinedResponse,
+                role: 'assistant',
+                timestamp: new Date()
+              };
+              
+              setMessages(prev => [...prev, combinedMessage]);
+              setIsLoading(false);
+              return;
+            } else if (topics.includes('roadmap') || topics.includes('details')) {
+              // If we handled roadmap or details separately, add combined response for other topics
+              if (combinedResponse) {
+                const additionalMessage: Message = {
+                  id: Date.now().toString(),
+                  content: combinedResponse + "\n\n💡 Would you like more information about any other aspect of this career?",
+                  role: 'assistant',
+                  timestamp: new Date()
+                };
+                
+                setMessages(prev => [...prev, additionalMessage]);
+              }
+              
+              setIsLoading(false);
+              return;
+            }
+          }
+        } else {
+          // Couldn't find the career in our data
+          const fallbackMessage: Message = {
+            id: Date.now().toString(),
+            content: `I'm sorry, I don't have specific information about that career. Would you like to explore other career options or ask about something else?`,
+            role: 'assistant',
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, fallbackMessage]);
+          setIsLoading(false);
+          return;
+        }
+      }
+
+      // Check if the message is unclear or confusing
+      const isUnclearMessage = 
+        inputValue.length < 3 || 
+        (inputValue.toLowerCase() !== 'yes' && 
+         inputValue.toLowerCase() !== 'no' && 
+         !isRoadmapQuestion && 
+         !isSalaryQuestion && 
+         !isSkillsQuestion && 
+         !isMoreDetailsRequest && 
+         !isJobRolesQuestion && 
+         !isMarketTrendQuestion && 
+         !isCompaniesQuestion && 
+         !isCertificationsQuestion &&
+         conversationState === ConversationState.DISCUSS_SPECIFIC_CAREER);
+
+      if (isUnclearMessage) {
+        const clarificationMessage: Message = {
+          id: Date.now().toString(),
+          content: "I'm not sure I understood what you're asking. Could you rephrase your question? You can ask about roadmaps, skills, salary, job roles, market trends, companies, or certifications for any of the careers we discussed.",
+          role: 'assistant',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, clarificationMessage]);
+        setIsLoading(false);
+        return;
+      }
+
+      // Only fall back to general response if we haven't handled the message in any of the above conditions
+      handleGeneralResponse(suggestions);
+      setIsLoading(false);
+    }
+  };
+
+  // Helper function for general responses
+  const handleGeneralResponse = (suggestions: CareerGuidanceEntry[]) => {
+    // Check if we have skills and hobbies selected but no specific career mentioned
+    if (selectedSkills.length > 0 || selectedHobbies.length > 0) {
+      const hasOthersHobby = selectedHobbies.map(h => h.value).includes('Others');
+      
+      // If no results found with both skills and hobbies, fall back to just skills
+      let careerSuggestions = suggestions;
+      if (suggestions.length === 0 && selectedSkills.length > 0) {
+        careerSuggestions = getCareerSuggestionsBySelectedSkills(
+          careerData, 
+          selectedSkills.map(s => s.value), 
+          []
+        );
+      }
+      
+      if (careerSuggestions.length > 0) {
+        const response = `Based on your skills${selectedHobbies.length > 0 ? ' and interests' : ''}, here are some career suggestions: ✨\n\n${careerSuggestions.map((career, index) => `${index + 1}. ${career.suggestedCareer}`).join('\n')}\n\n🔍 Would you like to know more about any of these careers? Just type the number or the name of the career you're interested in.`;
+        const newAssistantMessage: Message = {
+          id: Date.now().toString(),
+          content: response,
+          role: 'assistant',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, newAssistantMessage]);
+        setConversationState(ConversationState.SUGGEST_CAREERS);
+      } else {
+        const noMatchMessage: Message = {
+          id: Date.now().toString(),
+          content: 'I couldn\'t find any specific career matches. Could you try selecting different skills or hobbies? 😕',
+          role: 'assistant',
+          timestamp: new Date(),
+          showControls: true
+        };
+        setMessages(prev => [...prev, noMatchMessage]);
+      }
+    } else {
+      // General response when we don't have enough context
+      const generalMessage: Message = {
+        id: Date.now().toString(),
+        content: `I'd be happy to help you find career options that match your interests and skills. Could you please select your skills and hobbies from the options below? 👇`,
+        role: 'assistant',
+        timestamp: new Date(),
+        showControls: true
+      };
+      setMessages(prev => [...prev, generalMessage]);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleMessageSubmit();
+    }
+  };
+
+  const handleReset = () => {
+    setMessages(initialMessages);
+    setUserName('');
+    setSelectedSkills([]);
+    setSelectedHobbies([]);
+    setConversationState(ConversationState.GREETING);
+  };
+
+  // Add these helper functions for roadmap templates
+  const generateDetailedRoadmapTemplate = (career: CareerGuidanceEntry): string => {
+    return `**🎯 Detailed Career Roadmap: ${career.suggestedCareer}**
+
+**🔹 Phase 1: Foundation (Years 0-2)**
+
+**Educational Background**
+- Bachelor's degree in ${career.skill} or related field (recommended)
+- Relevant industry certifications
+- Online courses and bootcamps focusing on core skills
+- Self-learning through tutorials, documentation, and practice projects
+
+**Core Skills to Learn**
+- Fundamental principles and concepts of ${career.skill}
+- Basic programming/technical skills relevant to the field
+- Problem-solving and analytical thinking methodologies
+- Industry standard terminology and processes
+- Basic project management and organization
+
+**Basic Tools & Technologies**
+- Entry-level software and platforms used in the industry
+- Version control systems (like Git)
+- Communication and collaboration tools
+- Basic productivity and project management tools
+
+**🔹 Phase 2: Specialization (Years 2-4)**
+
+**Specialized Skills Development**
+- Advanced techniques in ${career.skill}
+- Specialized knowledge areas relevant to career goals
+- Process optimization and efficiency improvements
+- Advanced problem-solving for complex challenges
+- Technical writing and documentation
+
+**Tools & Frameworks Mastery**
+- Advanced software applications specific to your niche
+- Specialized frameworks and platforms
+- Automation tools for workflow enhancement
+- Testing and quality assurance tools
+- Data analysis and reporting tools
+
+**Projects to Build**
+- Personal portfolio showcasing progressive skill development
+- Collaborative projects demonstrating teamwork
+- Client work or simulated real-world projects
+- Open source contributions or community involvement
+- Specialized projects focusing on your intended niche
+
+**🔹 Phase 3: Professional Development (Years 4-6)**
+
+**Career Advancement**
+- Moving from junior to mid-level positions
+- Taking on increased responsibility
+- Mentoring junior team members
+- Leading small projects or teams
+- Developing management and leadership skills
+
+**Knowledge Expansion**
+- Cross-functional skills development
+- Business and strategic thinking
+- Advanced technical specializations
+- Industry trend awareness and adaptation
+- Professional network development
+
+**Contribution & Recognition**
+- Speaking at industry events
+- Publishing articles or research
+- Building personal brand in the industry
+- Contributing to significant projects
+- Receiving professional recognition or awards
+
+**🔹 Phase 4: Leadership & Mastery (Years 6+)**
+
+**Senior Positions**
+- Senior specialist or expert roles
+- Team or department leadership
+- Project management and oversight
+- Strategy development and implementation
+- Mentoring and talent development
+
+**Alternative Career Paths**
+- Consulting or freelancing
+- Entrepreneurship opportunities
+- Teaching or training roles
+- Research and development
+- Advisory or board positions
+
+**Legacy & Innovation**
+- Developing new methodologies or technologies
+- Influencing industry standards or practices
+- Creating intellectual property or publications
+- Building sustainable teams or systems
+- Giving back through mentorship programs
+
+The specific journey for a ${career.suggestedCareer} will vary based on individual goals, company needs, and industry trends, but this roadmap provides a general framework to guide your career development.
+
+**💡 Is there any specific phase or aspect of this career roadmap you'd like more details about?**`;
+  };
+
+  const generateDetailedCareerRoadmap = (career: CareerGuidanceEntry): string => {
+    return `**${career.suggestedCareer}**
+
+${career.suggestedCareer} is a profession that combines skills in ${career.skill} with interests related to ${career.hobby}. This career path allows professionals to apply technical expertise in creative and practical ways that align with their personal interests.
+
+**🎯 Career Roadmap: ${career.suggestedCareer}**
+
+**🔹 Phase 1: Foundation (Years 0-2)**
+- **Educational Background**
+  - Bachelor's degree in ${career.skill} or related field (recommended but not always required)
+  - Relevant certifications and online courses
+  - Self-learning through tutorials and documentation
+
+- **Core Skills to Learn**
+  - Fundamental principles of ${career.skill}
+  - Basic understanding of industry tools and software
+  - Problem-solving and analytical thinking
+  - Communication skills for team collaboration
+
+- **Basic Tools & Technologies**
+  - Industry-standard software and platforms
+  - Version control systems
+  - Project management tools
+
+**🔹 Phase 2: Specialization (Years 2-4)**
+- **Specialized Skills**
+  - Advanced techniques in ${career.skill}
+  - In-depth knowledge of specific sub-fields
+  - Project planning and execution
+  - Quality assurance and testing methodologies
+
+- **Tools & Frameworks**
+  - Advanced software applications
+  - Specialized frameworks for increased productivity
+  - Automation tools for repetitive tasks
+
+- **Projects to Build**
+  - Personal portfolio showcasing your abilities
+  - Collaborative projects with peers
+  - Open source contributions to build reputation
+
+**🔹 Phase 3: Professional Growth (Years 4-6)**
+- **Career Progression**
+  - Junior to mid-level positions
+  - Mentorship opportunities
+  - Leading small teams or projects
+  - Specializing in high-demand niches
+
+- **Advanced Development**
+  - Research and development of new techniques
+  - Optimization and efficiency improvements
+  - Cross-functional collaboration
+  - Problem-solving for complex challenges
+
+**🔹 Phase 4: Leadership & Mastery (Years 6+)**
+- **Senior Positions**
+  - Team leadership roles
+  - Project management
+  - Strategy and vision development
+  - Mentoring junior professionals
+
+- **Alternative Pathways**
+  - Consulting or freelancing
+  - Starting your own business
+  - Teaching and knowledge sharing
+  - Research and innovation
+
+**💰 Compensation & Benefits**
+- **Salary Range:** ${career.salaryRange}
+- **Work-Life Balance:** Most positions offer flexible hours and remote work possibilities
+- **Growth Potential:** High demand across various industries with opportunities for advancement
+
+**🔧 Required Skills**
+- **Technical Skills:**
+  - Strong foundation in ${career.skill}
+  - Proficiency with industry tools and technologies
+  - Problem-solving and analytical thinking
+
+- **Soft Skills:**
+  - Communication and collaboration
+  - Time management
+  - Adaptability
+  - Attention to detail
+
+**🌐 Industry Outlook**
+The demand for ${career.suggestedCareer}s is growing rapidly as organizations continue to prioritize ${career.skill.toLowerCase()} capabilities. The field offers opportunities in various sectors including technology, healthcare, finance, entertainment, and more.
+
+**🚀 Day-to-Day Responsibilities**
+- Collaborating with cross-functional teams
+- Designing and implementing solutions
+- Testing and validating work
+- Staying updated on industry trends and best practices
+- Communicating progress and results to stakeholders
+
+**📚 Recommended Resources**
+- Professional associations and communities
+- Industry conferences and workshops
+- Online learning platforms (Coursera, Udemy, LinkedIn Learning)
+- Books and publications specific to ${career.skill}
+
+**💡 Would you like to know more about any specific aspect of this career roadmap?**`;
+  };
+
+  // Helper function to generate responses for different topics
+  const generateTopicResponse = (topic: string, careerEntry: CareerGuidanceEntry): string => {
+    switch(topic) {
+      case 'salary':
+        return `**💰 Salary Information for ${careerEntry.suggestedCareer}**\n\nThe typical salary range for this career is ${careerEntry.salaryRange}. This can vary based on location, experience level, and specific employer.\n\n**Entry-level positions** typically start at the lower end, while **experienced professionals** with 5+ years can expect to earn in the mid to upper range. **Senior-level positions** with team leadership responsibilities may earn at or above the upper range.\n\nFactors that can affect salary include:\n- Geographic location (tech hubs typically pay more)\n- Company size and industry\n- Your negotiation skills\n- Additional skills and certifications\n- Education level`;
+      
+      case 'skills':
+        return `**🔧 Key Skills for ${careerEntry.suggestedCareer}**\n\n**Technical Skills:**\n- Strong foundation in ${careerEntry.skill}\n- Proficiency with industry tools and frameworks\n- Problem-solving and analytical thinking\n- Technical writing and documentation\n- Testing and quality assurance\n\n**Soft Skills:**\n- Communication and collaboration\n- Time management\n- Adaptability\n- Attention to detail\n- Client/stakeholder management\n- Continuous learning mindset\n\nContinuous learning is important in this field as technologies and methodologies evolve.`;
+      
+      case 'roles':
+        return `**💼 Job Roles and Responsibilities for ${careerEntry.suggestedCareer}**\n\n**Common Job Titles:**
+- Junior/Entry-level ${careerEntry.suggestedCareer}
+- Senior ${careerEntry.suggestedCareer}
+- Lead ${careerEntry.suggestedCareer}
+- ${careerEntry.suggestedCareer} Specialist
+- Technical ${careerEntry.suggestedCareer}
+
+**Key Responsibilities:**
+- Designing and implementing solutions using ${careerEntry.skill}
+- Collaborating with cross-functional teams
+- Problem-solving and troubleshooting
+- Documentation and reporting
+- Quality assurance and testing
+- Mentoring junior team members (senior roles)
+- Project planning and execution
+- Stakeholder communication
+
+**Work Environment:**
+- Full-time positions in companies
+- Remote work opportunities
+- Freelance/contract possibilities
+- Startup or enterprise settings
+- Collaborative team environment`;
+      
+      case 'trends':
+        return `**📈 Market Trends and Industry Outlook for ${careerEntry.suggestedCareer}**\n\n**Current Market Demand:**
+- High demand across various industries
+- Growing need for specialized ${careerEntry.skill} expertise
+- Increasing adoption in traditional sectors
+- Remote work opportunities expanding globally
+
+**Industry Growth:**
+- Steady growth in job openings
+- Emerging opportunities in new sectors
+- Rising demand for specialized skills
+- Competitive salary trends
+
+**Future Outlook:**
+- Projected continued growth
+- New specializations emerging
+- Increasing integration with other fields
+- Growing importance of ${careerEntry.skill} in business
+
+**Key Industry Sectors:**
+- Technology companies
+- Financial services
+- Healthcare
+- Entertainment and media
+- Manufacturing and logistics
+- Consulting firms
+
+**Emerging Trends:**
+- AI and automation integration
+- Remote work flexibility
+- Focus on continuous learning
+- Cross-functional collaboration
+- Emphasis on soft skills`;
+      
+      case 'companies':
+        const topCompanies = getTopCompaniesForCareer(careerEntry.suggestedCareer);
+        return `**🏢 Top Companies for ${careerEntry.suggestedCareer}s**\n\n**Industry Leaders:**
+- ${topCompanies.join('\n- ')}
+
+**What These Companies Offer:**
+- Competitive salaries (typically at or above the ${careerEntry.salaryRange} range)
+- Career advancement opportunities
+- Professional development resources
+- Challenging and innovative projects
+- Collaborative work environments
+- Work-life balance initiatives
+
+**Why They're Desirable Employers:**
+- Industry-leading technology and resources
+- Opportunities to work on cutting-edge projects
+- Strong professional networking
+- Prestige and resume-building experience
+- Comprehensive benefits packages
+- Learning and growth opportunities
+
+**Alternative Employment Options:**
+- Startups and scale-ups (for faster growth and more responsibilities)
+- Government and public sector organizations (for stability and impact)
+- Educational institutions (for research and teaching opportunities)
+- Non-profit organizations (for mission-driven work)
+- Freelance and consulting (for flexibility and variety)`;
+      
+      case 'certifications':
+        const topCertifications = getTopCertificationsForCareer(careerEntry.suggestedCareer);
+        return `**🏆 Top Certifications for ${careerEntry.suggestedCareer}s**\n\n**Industry-Recognized Credentials:**
+- ${topCertifications.join('\n- ')}
+
+**Benefits of Certification:**
+- Validation of your skills and knowledge
+- Increased earning potential (often 5-15% salary premium)
+- Competitive advantage in job applications
+- Structured learning path for skill development
+- Professional recognition among peers and employers
+
+**How to Get Certified:**
+- Most certifications require a combination of study and hands-on experience
+- Many offer online preparation courses and materials
+- Practice exams are typically available to assess readiness
+- Some require continuing education to maintain certification
+- Costs range from a few hundred to several thousand dollars
+
+**Certification Strategy:**
+- Begin with foundational certifications to build your knowledge base
+- Progress to specialized certifications as you define your career niche
+- Focus on certifications most valued by your target employers
+- Combine certifications with practical projects for maximum impact
+- Keep certifications current with renewal requirements`;
+      
+      default:
+        return '';
+    }
+  };
 
   if (!isLoggedIn) {
     return <Navigate to="/sign-in" />;
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-16">
-      <NavBar/>
-
-      <FadeIn>
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold mb-6">Career Guidance</h1>
-          <p className="text-lg text-muted-foreground">
-            Get personalized career advice and pathways based on your interests and skills.
-          </p>
-          
-          {/* Placeholder for career guide interface */}
-          <div className="mt-12 bg-white p-8 rounded-xl shadow-sm border">
-            <p className="text-center text-muted-foreground">
-              Career guidance interface coming soon...
-            </p>
+    <div className="flex flex-col h-screen max-w-4xl mx-auto p-4">
+      <div className="flex-1 bg-white rounded-lg shadow-lg flex flex-col">
+        <div className="bg-blue-600 text-white py-3 px-4 rounded-t-lg flex items-center">
+          <div className="text-xl font-bold">CareerAI</div>
+          <div className="ml-2 text-sm bg-blue-500 px-2 py-1 rounded-full">Career Guidance Bot</div>
+          <div className="ml-auto flex space-x-2">
+            <div className="h-3 w-3 rounded-full bg-green-400"></div>
+            <div className="text-xs">Online</div>
           </div>
         </div>
-      </FadeIn>
+        <div className="flex-1 overflow-y-auto p-4">
+          <div className="space-y-4">
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`flex ${
+                  msg.role === 'user' ? 'justify-end' : 'justify-start'
+                }`}
+              >
+                <div
+                  className={`max-w-[80%] rounded-lg p-3 ${
+                    msg.role === 'user'
+                      ? 'bg-blue-500 text-white rounded-br-none'
+                      : 'bg-gray-100 text-gray-800 rounded-bl-none'
+                  }`}
+                >
+                  <div 
+                    className="text-base" /* Increased font size */
+                    dangerouslySetInnerHTML={{ __html: formatMessage(msg.content) }}
+                  />
+                  <p className="text-xs opacity-70 mt-1">
+                    {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </p>
+                </div>
+              </div>
+            ))}
+            {messages[messages.length - 1]?.showControls && (
+              <div className="mb-4 space-y-4">
+                <div className="relative z-20">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    🧠 Select your skills (select as many as you want):
+                  </label>
+                  <Select
+                    isMulti
+                    options={availableSkills}
+                    value={selectedSkills}
+                    onChange={handleSkillChange}
+                    placeholder="Select your skills..."
+                    className="w-full"
+                  />
+                </div>
+
+                <div className="relative z-10">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    🎯 Select your interests/hobbies (maximum 2, favorite first):
+                  </label>
+                  <Select
+                    isMulti
+                    options={availableHobbies}
+                    value={selectedHobbies}
+                    onChange={handleHobbyChange}
+                    placeholder="Select your hobbies (max 2)..."
+                    className="w-full"
+                    isDisabled={selectedSkills.length === 0}
+                  />
+                  {selectedHobbies.length === 2 && (
+                    <p className="text-xs text-amber-600 mt-1">Maximum 2 hobbies allowed. Your first selection is given higher priority.</p>
+                  )}
+                </div>
+
+                <Button 
+                  onClick={handleSelectionSubmit}
+                  disabled={selectedSkills.length === 0 && selectedHobbies.length === 0}
+                  aria-label="Submit skills and hobbies"
+                  className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 text-base"
+                >
+                  🚀 Get Career Suggestions
+                </Button>
+              </div>
+            )}
+          </div>
+          <div ref={messagesEndRef} />
+        </div>
+
+        <div className="border-t p-4 bg-white sticky bottom-0 z-30 shadow-md">
+          <div className="flex items-center space-x-2">
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder={isChatComplete ? "Chat completed. Refresh page to start a new conversation." : "Type your message here..."}
+              className={`flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base ${
+                isChatComplete ? 'bg-gray-100 cursor-not-allowed' : ''
+              }`}
+              disabled={isChatComplete}
+            />
+            <button
+              onClick={handleMessageSubmit}
+              className={`p-3 rounded-lg transition-colors ${
+                isChatComplete 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : 'bg-blue-500 text-white hover:bg-blue-600'
+              }`}
+              aria-label="Send message"
+              disabled={isChatComplete}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                />
+              </svg>
+            </button>
+          </div>
+          {isChatComplete && (
+            <div className="absolute -top-8 left-0 right-0 text-center">
+              <p className="text-sm text-gray-500">Refresh the page to start a new conversation</p>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
