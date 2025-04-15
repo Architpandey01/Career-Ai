@@ -41,6 +41,20 @@ const initialMessages: Message[] = [
   },
 ];
 
+interface RoadmapPhase {
+  title: string;
+  topics: string[];
+}
+
+interface CareerRoadmap {
+  title: string;
+  phases: RoadmapPhase[];
+}
+
+interface RoadmapData {
+  [key: string]: CareerRoadmap;
+}
+
 const CareerGuide = () => {
   const { isLoggedIn } = useAuth();
   const { data: careerData, isLoading: isDataLoading, error: dataError } = useCareerGuidanceData();
@@ -196,7 +210,7 @@ const CareerGuide = () => {
     return `**${career.suggestedCareer}**
 
 **🔍 Career Overview:**
-${career.suggestedCareer} combines ${career.skill} with interests in ${career.hobby}.
+${career.briefOverview || `${career.suggestedCareer} combines ${career.skill} with interests in ${career.hobby}.`}
 
 **💰 Salary Range:** ${career.salaryRange}
 
@@ -211,6 +225,13 @@ ${career.suggestedCareer} combines ${career.skill} with interests in ${career.ho
 
 **🌐 Market Trend:** 
 The demand for ${career.suggestedCareer}s is ${Math.random() > 0.3 ? 'growing' : 'stable'} in the current job market, with opportunities in technology, healthcare, finance, and entertainment sectors.
+
+**📋 Day-to-Day Tasks:**
+${career.dayToDayTasks ? career.dayToDayTasks.split(';').map(task => `- ${task.trim()}`).join('\n') : `- Collaborating with cross-functional teams
+- Designing and implementing solutions
+- Testing and validating work
+- Staying updated on industry trends and best practices
+- Communicating progress and results to stakeholders`}
 
 **📈 Job Opportunities:**
 - Entry-level: Junior positions requiring 0-2 years experience
@@ -336,7 +357,7 @@ The demand for ${career.suggestedCareer}s is ${Math.random() > 0.3 ? 'growing' :
     return `# ${career.suggestedCareer}
 
 📋 Career Overview
-${career.suggestedCareer} is a profession that combines skills in ${career.skill} with interests related to ${career.hobby}. This career path allows professionals to apply technical expertise in creative and practical ways that align with their personal interests.
+${career.briefOverview || `${career.suggestedCareer} is a profession that combines skills in ${career.skill} with interests related to ${career.hobby}. This career path allows professionals to apply technical expertise in creative and practical ways that align with their personal interests.`}
 
 💰 Compensation & Benefits
 - **Salary Range:** ${career.salaryRange}
@@ -363,13 +384,93 @@ ${career.careerRoadmap}
 The demand for ${career.suggestedCareer}s is growing rapidly as organizations continue to prioritize ${career.skill.toLowerCase()} capabilities. The field offers opportunities in various sectors including technology, healthcare, finance, entertainment, and more.
 
 🚀 Day-to-Day Responsibilities
-- Collaborating with cross-functional teams
+${career.dayToDayTasks || `- Collaborating with cross-functional teams
 - Designing and implementing solutions
 - Testing and validating work
 - Staying updated on industry trends and best practices
-- Communicating progress and results to stakeholders
+- Communicating progress and results to stakeholders`}
 
 💡 Would you like to know more about this career path or explore other options that match your skills and interests?`;
+  };
+
+  // Helper function to extract name from greeting message
+  const extractName = (input: string): string | null => {
+    // Clean the input
+    const cleanedInput = input.trim();
+    
+    // Check if it's just a simple greeting with no name
+    const simpleGreetings = ['hi', 'hello', 'hey', 'hola', 'greetings', 'howdy', 'yo'];
+    if (simpleGreetings.includes(cleanedInput.toLowerCase())) {
+      return null; // Return null to indicate it's just a greeting with no name
+    }
+    
+    // Check if the message contains a greeting about how the bot is doing
+    const hasHowAreYou = cleanedInput.toLowerCase().includes('how are you') || 
+                         cleanedInput.toLowerCase().includes('how are u') || 
+                         cleanedInput.toLowerCase().includes('how r u') ||
+                         cleanedInput.toLowerCase().includes('how you doing') ||
+                         cleanedInput.toLowerCase().includes('how do you do') ||
+                         cleanedInput.toLowerCase().includes('hows it going') ||
+                         cleanedInput.toLowerCase().includes('how\'s it going');
+    
+    // Common patterns to extract names
+    const namePatterns = [
+      // "my name is John"
+      /(?:my name is|i'?m called|i am called|call me|name'?s|names)\s+([a-zA-Z0-9]+)/i,
+      // "i am John" or "i'm John"
+      /(?:i am|i'm)\s+([a-zA-Z0-9]+)/i,
+      // "myself John"
+      /(?:myself)\s+([a-zA-Z0-9]+)/i,
+      // Last resort - just take the last word in case of simple inputs
+      /^(?:hi|hello|hey|hoi)?\s*,?\s*([a-zA-Z0-9]+)\.?$/i
+    ];
+    
+    // Try each pattern
+    for (const pattern of namePatterns) {
+      const match = cleanedInput.match(pattern);
+      if (match && match[1]) {
+        // Clean up possible punctuation from the end of the name
+        return match[1].replace(/[.,!?;:]$/, '');
+      }
+    }
+    
+    // If no pattern matches, handle special cases and cleanup
+    let extractedName = cleanedInput;
+    
+    // Remove common words that are not names
+    const wordsToRemove = ['HERE', 'THERE', 'MY NAME IS', 'I AM', 'MYSELF', 'NAME'];
+    
+    // Split the input into words
+    let words = extractedName.split(/\s+/);
+    
+    // Filter out words that are in the wordsToRemove list
+    words = words.filter(word => !wordsToRemove.includes(word.toUpperCase()));
+    
+    // If we still have words left, join them back together
+    if (words.length > 0) {
+      extractedName = words.join(' ');
+      
+      // If name is ALL CAPS, convert to title case
+      if (extractedName === extractedName.toUpperCase()) {
+        extractedName = extractedName.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+      }
+      
+      return extractedName;
+    }
+    
+    return null; // No name found
+  };
+
+  // Check if message contains "how are you" or similar phrases
+  const containsHowAreYou = (input: string): boolean => {
+    const lowerInput = input.toLowerCase().trim();
+    return lowerInput.includes('how are you') || 
+           lowerInput.includes('how are u') || 
+           lowerInput.includes('how r u') ||
+           lowerInput.includes('how you doing') ||
+           lowerInput.includes('how do you do') ||
+           lowerInput.includes('hows it going') ||
+           lowerInput.includes('how\'s it going');
   };
 
   // Handle the message submission with the updated logic
@@ -391,10 +492,43 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
 
       // Handle name input in greeting state
       if (conversationState === ConversationState.GREETING) {
-        setUserName(currentInput);
+        const extractedName = extractName(currentInput);
+        
+        // Check if the message contains "how are you" or similar
+        const hasHowAreYou = containsHowAreYou(currentInput);
+        
+        // If we didn't extract a name, ask again
+        if (extractedName === null) {
+          let promptAgainMessage = '';
+          if (hasHowAreYou) {
+            promptAgainMessage = `I'm doing great, thank you for asking! 😊 But I still need to know your name to help you better. What's your name?`;
+          } else {
+            promptAgainMessage = `Good to meet you! To give you better career recommendations, I'd like to know your name. Could you please tell me your name?`;
+          }
+          
+          const promptAgain: Message = {
+            id: Date.now().toString(),
+            content: promptAgainMessage,
+            role: 'assistant',
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, promptAgain]);
+          setIsLoading(false);
+          return;
+        }
+        
+        setUserName(extractedName);
+        
+        let welcomeResponse = '';
+        if (hasHowAreYou) {
+          welcomeResponse = `I'm doing great, thank you for asking! 😊 And nice to meet you, ${extractedName}! Let's find the perfect career path for you.\n\n👇 Please select your skills and up to 2 hobbies below. Select your favorite hobby first for better recommendations!`;
+        } else {
+          welcomeResponse = `Nice to meet you, ${extractedName}! 😊 Let's find the perfect career path for you.\n\n👇 Please select your skills and up to 2 hobbies below. Select your favorite hobby first for better recommendations!`;
+        }
+        
         const welcomeMessage: Message = {
           id: Date.now().toString(),
-          content: `Nice to meet you, ${currentInput}! 😊 Let's find the perfect career path for you.\n\n👇 Please select your skills and up to 2 hobbies below. Select your favorite hobby first for better recommendations!`,
+          content: welcomeResponse,
           role: 'assistant',
           timestamp: new Date(),
           showControls: true
@@ -423,12 +557,25 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
       if (isGoodbyeMessage) {
         const goodbyeMessage: Message = {
           id: Date.now().toString(),
-          content: `👋 Thank you for using CareerAI! I wish you the very best in your career journey. Remember, every great career starts with a single step, and you're already on your way! If you need guidance in the future, don't hesitate to come back. Good luck! 🌟`,
+          content: `🌟 It was amazing chatting with you! Remember, every step you take brings you closer to your dreams. Stay curious, stay confident, and never stop growing. You've got this! 💪✨ Come back anytime — I'm always here to help. 😊👋`,
           role: 'assistant',
           timestamp: new Date()
         };
         setMessages(prev => [...prev, goodbyeMessage]);
         setIsChatComplete(true);
+        setIsLoading(false);
+        return;
+      }
+
+      // Check for "how are you" questions at any point in the conversation
+      if (containsHowAreYou(currentInput) && !currentInput.toLowerCase().includes('skill') && !currentInput.toLowerCase().includes('hobby')) {
+        const howAreYouMessage: Message = {
+          id: Date.now().toString(),
+          content: `I'm doing great, thank you for asking! 😊 I'm here to help you with your career guidance needs. How can I assist you today?`,
+          role: 'assistant',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, howAreYouMessage]);
         setIsLoading(false);
         return;
       }
@@ -979,6 +1126,22 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
       }
 
       // Check if the message is unclear or confusing
+      const isPositiveAcknowledgment = 
+        currentInput.toLowerCase().match(/^(great|good|nice|thanks|thank you|i like it|i love it|love it|awesome|cool|sounds good|perfect|excellent|wonderful|helpful|useful|interesting|that's helpful|that helps|superb|wow|just wow|amazing|fantastic|brilliant|outstanding|impressive|fabulous|super)!?\.?$/i) !== null;
+        
+      // If the user just acknowledges or expresses approval for the information
+      if (isPositiveAcknowledgment) {
+        const acknowledgmentResponse: Message = {
+          id: Date.now().toString(),
+          content: `I'm glad that was helpful! 😊 Is there anything else you'd like to know about this career or any other career paths?`,
+          role: 'assistant',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, acknowledgmentResponse]);
+        setIsLoading(false);
+        return;
+      }
+      
       const isUnclearMessage = 
         currentInput.length < 3 || 
         (currentInput.toLowerCase() !== 'yes' && 
@@ -1083,204 +1246,30 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
 
   // Add these helper functions for roadmap templates
   const generateDetailedRoadmapTemplate = (career: CareerGuidanceEntry): string => {
-    return `**🎯 Detailed Career Roadmap: ${career.suggestedCareer}**
+    const careerLower = career.suggestedCareer.toLowerCase();
+    
+    // Try to find a matching roadmap in the JSON file
+    const roadmaps = require('../public/final_detailed_career_roadmaps.json') as RoadmapData;
+    const matchingRoadmap = Object.entries(roadmaps).find(([key]) => 
+      careerLower.includes(key.toLowerCase()) || key.toLowerCase().includes(careerLower)
+    );
 
-**🔹 Phase 1: Foundation (Years 0-2)**
-
-**Educational Background**
-- Bachelor's degree in ${career.skill} or related field (recommended)
-- Relevant industry certifications
-- Online courses and bootcamps focusing on core skills
-- Self-learning through tutorials, documentation, and practice projects
-
-**Core Skills to Learn**
-- Fundamental principles and concepts of ${career.skill}
-- Basic programming/technical skills relevant to the field
-- Problem-solving and analytical thinking methodologies
-- Industry standard terminology and processes
-- Basic project management and organization
-
-**Basic Tools & Technologies**
-- Entry-level software and platforms used in the industry
-- Version control systems (like Git)
-- Communication and collaboration tools
-- Basic productivity and project management tools
-
-**🔹 Phase 2: Specialization (Years 2-4)**
-
-**Specialized Skills Development**
-- Advanced techniques in ${career.skill}
-- Specialized knowledge areas relevant to career goals
-- Process optimization and efficiency improvements
-- Advanced problem-solving for complex challenges
-- Technical writing and documentation
-
-**Tools & Frameworks Mastery**
-- Advanced software applications specific to your niche
-- Specialized frameworks and platforms
-- Automation tools for workflow enhancement
-- Testing and quality assurance tools
-- Data analysis and reporting tools
-
-**Projects to Build**
-- Personal portfolio showcasing progressive skill development
-- Collaborative projects demonstrating teamwork
-- Client work or simulated real-world projects
-- Open source contributions or community involvement
-- Specialized projects focusing on your intended niche
-
-**🔹 Phase 3: Professional Development (Years 4-6)**
-
-**Career Advancement**
-- Moving from junior to mid-level positions
-- Taking on increased responsibility
-- Mentoring junior team members
-- Leading small projects or teams
-- Developing management and leadership skills
-
-**Knowledge Expansion**
-- Cross-functional skills development
-- Business and strategic thinking
-- Advanced technical specializations
-- Industry trend awareness and adaptation
-- Professional network development
-
-**Contribution & Recognition**
-- Speaking at industry events
-- Publishing articles or research
-- Building personal brand in the industry
-- Contributing to significant projects
-- Receiving professional recognition or awards
-
-**🔹 Phase 4: Leadership & Mastery (Years 6+)**
-
-**Senior Positions**
-- Senior specialist or expert roles
-- Team or department leadership
-- Project management and oversight
-- Strategy development and implementation
-- Mentoring and talent development
-
-**Alternative Career Paths**
-- Consulting or freelancing
-- Entrepreneurship opportunities
-- Teaching or training roles
-- Research and development
-- Advisory or board positions
-
-**Legacy & Innovation**
-- Developing new methodologies or technologies
-- Influencing industry standards or practices
-- Creating intellectual property or publications
-- Building sustainable teams or systems
-- Giving back through mentorship programs
-
-The specific journey for a ${career.suggestedCareer} will vary based on individual goals, company needs, and industry trends, but this roadmap provides a general framework to guide your career development.
-
-**💡 Is there any specific phase or aspect of this career roadmap you'd like more details about?**`;
-  };
-
-  const generateDetailedCareerRoadmap = (career: CareerGuidanceEntry): string => {
-    return `**${career.suggestedCareer}**
-
-${career.suggestedCareer} is a profession that combines skills in ${career.skill} with interests related to ${career.hobby}. This career path allows professionals to apply technical expertise in creative and practical ways that align with their personal interests.
-
-**🎯 Career Roadmap: ${career.suggestedCareer}**
-
-**🔹 Phase 1: Foundation (Years 0-2)**
-- **Educational Background**
-  - Bachelor's degree in ${career.skill} or related field (recommended but not always required)
-  - Relevant certifications and online courses
-  - Self-learning through tutorials and documentation
-
-- **Core Skills to Learn**
-  - Fundamental principles of ${career.skill}
-  - Basic understanding of industry tools and software
-  - Problem-solving and analytical thinking
-  - Communication skills for team collaboration
-
-- **Basic Tools & Technologies**
-  - Industry-standard software and platforms
-  - Version control systems
-  - Project management tools
-
-**🔹 Phase 2: Specialization (Years 2-4)**
-- **Specialized Skills**
-  - Advanced techniques in ${career.skill}
-  - In-depth knowledge of specific sub-fields
-  - Project planning and execution
-  - Quality assurance and testing methodologies
-
-- **Tools & Frameworks**
-  - Advanced software applications
-  - Specialized frameworks for increased productivity
-  - Automation tools for repetitive tasks
-
-- **Projects to Build**
-  - Personal portfolio showcasing your abilities
-  - Collaborative projects with peers
-  - Open source contributions to build reputation
-
-**🔹 Phase 3: Professional Growth (Years 4-6)**
-- **Career Progression**
-  - Junior to mid-level positions
-  - Mentorship opportunities
-  - Leading small teams or projects
-  - Specializing in high-demand niches
-
-- **Advanced Development**
-  - Research and development of new techniques
-  - Optimization and efficiency improvements
-  - Cross-functional collaboration
-  - Problem-solving for complex challenges
-
-**🔹 Phase 4: Leadership & Mastery (Years 6+)**
-- **Senior Positions**
-  - Team leadership roles
-  - Project management
-  - Strategy and vision development
-  - Mentoring junior professionals
-
-- **Alternative Pathways**
-  - Consulting or freelancing
-  - Starting your own business
-  - Teaching and knowledge sharing
-  - Research and innovation
-
-**💰 Compensation & Benefits**
-- **Salary Range:** ${career.salaryRange}
-- **Work-Life Balance:** Most positions offer flexible hours and remote work possibilities
-- **Growth Potential:** High demand across various industries with opportunities for advancement
-
-**🔧 Required Skills**
-- **Technical Skills:**
-  - Strong foundation in ${career.skill}
-  - Proficiency with industry tools and technologies
-  - Problem-solving and analytical thinking
-
-- **Soft Skills:**
-  - Communication and collaboration
-  - Time management
-  - Adaptability
-  - Attention to detail
-
-**🌐 Industry Outlook**
-The demand for ${career.suggestedCareer}s is growing rapidly as organizations continue to prioritize ${career.skill.toLowerCase()} capabilities. The field offers opportunities in various sectors including technology, healthcare, finance, entertainment, and more.
-
-**🚀 Day-to-Day Responsibilities**
-- Collaborating with cross-functional teams
-- Designing and implementing solutions
-- Testing and validating work
-- Staying updated on industry trends and best practices
-- Communicating progress and results to stakeholders
-
-**📚 Recommended Resources**
-- Professional associations and communities
-- Industry conferences and workshops
-- Online learning platforms (Coursera, Udemy, LinkedIn Learning)
-- Books and publications specific to ${career.skill}
-
-**💡 Would you like to know more about any specific aspect of this career roadmap?**`;
+    if (matchingRoadmap) {
+      const [_, roadmap] = matchingRoadmap;
+      let response = `**${roadmap.title}**\n\n`;
+      
+      roadmap.phases.forEach(phase => {
+        response += `${phase.title}\n\n`;
+        phase.topics.forEach(topic => {
+          response += `- ${topic}\n`;
+        });
+        response += `\n`;
+      });
+      
+      return response;
+    }
+    
+    return `I don't have a detailed roadmap template for ${career.suggestedCareer} yet.`;
   };
 
   // Helper function to generate responses for different topics
@@ -1418,7 +1407,7 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
     <div className="relative min-h-screen bg-gray-50">
       <button 
         onClick={() => window.location.href = '/dashboard'} 
-        className="fixed top-4 left-4 md:left-8 lg:left-12 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg shadow-md transition-all duration-300 flex items-center group overflow-hidden relative"
+        className="fixed top-4 left-4 md:left-8 lg:left-12 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg shadow-md transition-all duration-300 flex items-center group overflow-hidden relative z-50"
         aria-label="Back to dashboard"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-gray-100 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
@@ -1431,6 +1420,13 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
       <div className="flex flex-col h-screen max-w-4xl mx-auto p-4">
         <div className="flex-1 bg-white rounded-lg shadow-lg flex flex-col">
           <div className="bg-blue-600 text-white py-3 px-4 rounded-t-lg flex items-center">
+            <div className="flex items-center justify-center mr-3 relative">
+              <img 
+                src="/images/chatbot-logo.svg" 
+                alt="CareerAI Logo" 
+                className="w-9 h-9 drop-shadow-md"
+              />
+            </div>
             <div className="text-xl font-bold">CareerAI</div>
             <div className="ml-2 text-sm bg-blue-500 px-2 py-1 rounded-full">Career Guidance Bot</div>
             <div className="ml-auto flex space-x-2">

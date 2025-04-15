@@ -4,6 +4,20 @@ import { CareerGuidanceEntry } from './careerGuidanceUtils';
 const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 
+interface RoadmapPhase {
+  title: string;
+  topics: string[];
+}
+
+interface CareerRoadmap {
+  title: string;
+  phases: RoadmapPhase[];
+}
+
+interface RoadmapsData {
+  [key: string]: CareerRoadmap;
+}
+
 /**
  * Generate a detailed career description using OpenAI's API
  */
@@ -72,48 +86,44 @@ export const generateCareerRoadmap = async (
   userName: string
 ): Promise<string> => {
   try {
-    const prompt = `
-      Generate a detailed career roadmap for ${userName} about becoming a ${career.suggestedCareer}.
-      
-      Structure the roadmap in phases:
-      - Phase 1: Foundation (Years 0-2) with Educational Background, Core Skills to Learn, and Basic Tools
-      - Phase 2: Specialization (Years 2-4) with Specialized Skills, Tools & Frameworks, Projects to Build
-      - Phase 3: Advanced Development (Years 4-6) with Open Source Contributions, Portfolio Building
-      - Phase 4: Career Pathways (Years 6+) with Job Titles and Growth Options
-      
-      Include specific skills, tools, technologies, and resources relevant to this career.
-      Make it detailed, actionable, and include emojis for section headers.
-      Format with clean headings using bold text (**) rather than markdown headings.
-      Use phases, bullet points and numbered lists where appropriate.
-    `;
-
-    const response = await fetch(OPENAI_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: prompt }],
-        temperature: 0.7,
-        max_tokens: 1200
-      })
-    });
-
-    const data = await response.json();
+    // Try to find a matching roadmap in the JSON file
+    const response = await fetch('/final_detailed_career_roadmaps.json');
+    const roadmaps: RoadmapsData = await response.json();
     
-    if (data.choices && data.choices.length > 0) {
-      return data.choices[0].message.content;
-    } else {
-      // Fallback to the template-based response if API fails
-      console.error('API returned unexpected format:', data);
-      return generateDetailedRoadmapTemplate(career);
+    const careerLower = career.suggestedCareer.toLowerCase();
+    
+    // First try exact match
+    let matchingRoadmap = Object.entries(roadmaps).find(([key]) => 
+      key.toLowerCase() === careerLower
+    );
+    
+    // If no exact match, try partial match
+    if (!matchingRoadmap) {
+      matchingRoadmap = Object.entries(roadmaps).find(([key]) => 
+        careerLower.includes(key.toLowerCase()) || key.toLowerCase().includes(careerLower)
+      );
     }
+
+    if (matchingRoadmap) {
+      const [_, roadmap] = matchingRoadmap;
+      let response = `**${roadmap.title}**\n\n`;
+      
+      roadmap.phases.forEach(phase => {
+        response += `${phase.title}\n\n`;
+        phase.topics.forEach(topic => {
+          response += `- ${topic}\n`;
+        });
+        response += `\n`;
+      });
+      
+      return response;
+    }
+    
+    // Fallback to template if no matching roadmap found
+    return `I don't have a detailed roadmap template for ${career.suggestedCareer} yet.`;
   } catch (error) {
     console.error('Error generating career roadmap:', error);
-    // Fallback to template if API fails
-    return generateDetailedRoadmapTemplate(career);
+    return `I don't have a detailed roadmap template for ${career.suggestedCareer} yet.`;
   }
 };
 
@@ -226,100 +236,62 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
 /**
  * Detailed roadmap template for when API is unavailable
  */
-const generateDetailedRoadmapTemplate = (career: CareerGuidanceEntry): string => {
-  return `**🎯 Detailed Career Roadmap: ${career.suggestedCareer}**
+const generateDetailedRoadmapTemplate = async (career: CareerGuidanceEntry): Promise<string> => {
+  const careerLower = career.suggestedCareer.toLowerCase();
+  
+  try {
+    // Fetch the roadmap data from the public directory
+    const response = await fetch('/detailed_career_roadmaps.json');
+    const roadmaps: RoadmapsData = await response.json();
+    
+    const matchingRoadmap = Object.entries(roadmaps).find(([key]) => 
+      careerLower.includes(key.toLowerCase()) || key.toLowerCase().includes(careerLower)
+    );
+
+    if (matchingRoadmap) {
+      const [title, roadmap] = matchingRoadmap;
+      let response = `**🎯 ${roadmap.title} Roadmap**\n\n`;
+      
+      roadmap.phases.forEach(phase => {
+        response += `**${phase.title}**\n`;
+        phase.topics.forEach(topic => {
+          response += `- ${topic}\n`;
+        });
+        response += '\n';
+      });
+
+      return response;
+    }
+  } catch (error) {
+    console.error('Error loading roadmap data:', error);
+  }
+
+  // Default roadmap for careers not found in the JSON
+  return `**🎯 Career Roadmap: ${career.suggestedCareer}**
 
 **🔹 Phase 1: Foundation (Years 0-2)**
-
-**Educational Background**
-- Bachelor's degree in ${career.skill} or related field (recommended)
-- Relevant industry certifications
-- Online courses and bootcamps focusing on core skills
-- Self-learning through tutorials, documentation, and practice projects
-
-**Core Skills to Learn**
-- Fundamental principles and concepts of ${career.skill}
-- Basic programming/technical skills relevant to the field
-- Problem-solving and analytical thinking methodologies
-- Industry standard terminology and processes
-- Basic project management and organization
-
-**Basic Tools & Technologies**
-- Entry-level software and platforms used in the industry
-- Version control systems (like Git)
-- Communication and collaboration tools
-- Basic productivity and project management tools
+- Educational background and certifications
+- Core technical skills development
+- Basic tools and technologies
+- Initial project experience
 
 **🔹 Phase 2: Specialization (Years 2-4)**
+- Advanced technical skills
+- Industry-specific knowledge
+- Project management
+- Team collaboration
 
-**Specialized Skills Development**
-- Advanced techniques in ${career.skill}
-- Specialized knowledge areas relevant to career goals
-- Process optimization and efficiency improvements
-- Advanced problem-solving for complex challenges
-- Technical writing and documentation
+**🔹 Phase 3: Professional Growth (Years 4-6)**
+- Leadership skills
+- Advanced certifications
+- Strategic thinking
+- Industry networking
 
-**Tools & Frameworks Mastery**
-- Advanced software applications specific to your niche
-- Specialized frameworks and platforms
-- Automation tools for workflow enhancement
-- Testing and quality assurance tools
-- Data analysis and reporting tools
+**🔹 Phase 4: Leadership (Years 6+)**
+- Senior roles
+- Team management
+- Strategic planning
+- Industry influence
 
-**Projects to Build**
-- Personal portfolio showcasing progressive skill development
-- Collaborative projects demonstrating teamwork
-- Client work or simulated real-world projects
-- Open source contributions or community involvement
-- Specialized projects focusing on your intended niche
-
-**🔹 Phase 3: Professional Development (Years 4-6)**
-
-**Career Advancement**
-- Moving from junior to mid-level positions
-- Taking on increased responsibility
-- Mentoring junior team members
-- Leading small projects or teams
-- Developing management and leadership skills
-
-**Knowledge Expansion**
-- Cross-functional skills development
-- Business and strategic thinking
-- Advanced technical specializations
-- Industry trend awareness and adaptation
-- Professional network development
-
-**Contribution & Recognition**
-- Speaking at industry events
-- Publishing articles or research
-- Building personal brand in the industry
-- Contributing to significant projects
-- Receiving professional recognition or awards
-
-**🔹 Phase 4: Leadership & Mastery (Years 6+)**
-
-**Senior Positions**
-- Senior specialist or expert roles
-- Team or department leadership
-- Project management and oversight
-- Strategy development and implementation
-- Mentoring and talent development
-
-**Alternative Career Paths**
-- Consulting or freelancing
-- Entrepreneurship opportunities
-- Teaching or training roles
-- Research and development
-- Advisory or board positions
-
-**Legacy & Innovation**
-- Developing new methodologies or technologies
-- Influencing industry standards or practices
-- Creating intellectual property or publications
-- Building sustainable teams or systems
-- Giving back through mentorship programs
-
-The specific journey for a ${career.suggestedCareer} will vary based on individual goals, company needs, and industry trends, but this roadmap provides a general framework to guide your career development.
-
-**💡 Is there any specific phase or aspect of this career roadmap you'd like more details about?**`;
+**💡 Would you like more specific details about any phase of this career roadmap?**`;
 }; 

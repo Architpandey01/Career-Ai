@@ -1,9 +1,7 @@
-
 import React, { useEffect } from 'react';
 import NavBar from '@/components/NavBar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
-import ChatInterface from '@/components/ChatInterface';
 import Footer from '@/components/Footer';
 import FadeIn from '@/components/animations/FadeIn';
 import { cn } from '@/lib/utils';
@@ -78,7 +76,28 @@ const Index = () => {
               </FadeIn>
               
               <FadeIn direction="left" delay={200}>
-                <ChatInterface />
+                <div className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-12 shadow-lg overflow-hidden relative">
+                  <div className="absolute -top-16 -right-16 w-32 h-32 bg-blue-200 rounded-full opacity-60 blur-xl"></div>
+                  <div className="absolute -bottom-16 -left-16 w-32 h-32 bg-indigo-200 rounded-full opacity-60 blur-xl"></div>
+                  
+                  <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 relative">
+                    Start Your Career Conversation Now!
+                  </h3>
+                  
+                  <Link to="/career-guide" className="group relative">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg blur opacity-70 group-hover:opacity-100 transition duration-300"></div>
+                    <button className="relative flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-lg font-medium rounded-lg transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-xl shadow-lg">
+                      <span>Chat with CareerAI</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </button>
+                  </Link>
+                  
+                  <p className="text-sm text-gray-600 mt-6 text-center max-w-md">
+                    Our AI-powered career guide is ready to help you discover the perfect career path based on your skills and interests.
+                  </p>
+                </div>
               </FadeIn>
             </div>
           </div>

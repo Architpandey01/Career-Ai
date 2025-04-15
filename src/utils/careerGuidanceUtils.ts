@@ -8,6 +8,8 @@ export interface CareerGuidanceEntry {
   relevanceScore: number;
   salaryRange: string;
   careerRoadmap: string;
+  briefOverview: string;
+  dayToDayTasks: string;
 }
 
 // Chat conversation states
@@ -21,6 +23,10 @@ export enum ConversationState {
   DISCUSS_SPECIFIC_CAREER = 'discuss_specific_career',
 }
 
+interface ScoredCareer extends CareerGuidanceEntry {
+  score: number;
+}
+
 // Function to load and parse the CSV data
 export const useCareerGuidanceData = () => {
   const [data, setData] = useState<CareerGuidanceEntry[]>([]);
@@ -30,7 +36,7 @@ export const useCareerGuidanceData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/career_guidance_dataset_updated.csv');
+        const response = await fetch('/career_guidance_dataset_with_overview_tasks.csv');
         const csvText = await response.text();
         
         // Parse CSV
@@ -42,8 +48,28 @@ export const useCareerGuidanceData = () => {
         for (let i = 1; i < rows.length; i++) {
           if (!rows[i].trim()) continue;
           
-          const values = rows[i].split(',');
-          if (values.length >= 6) {
+          // Process the row properly to handle commas within quoted fields
+          let values = [];
+          let insideQuotes = false;
+          let currentValue = '';
+          
+          for (let j = 0; j < rows[i].length; j++) {
+            const char = rows[i][j];
+            
+            if (char === '"') {
+              insideQuotes = !insideQuotes;
+            } else if (char === ',' && !insideQuotes) {
+              values.push(currentValue.trim());
+              currentValue = '';
+            } else {
+              currentValue += char;
+            }
+          }
+          
+          // Don't forget the last value
+          values.push(currentValue.trim());
+          
+          if (values.length >= 8) {
             parsedData.push({
               skill: values[0].trim(),
               hobby: values[1].trim(),
@@ -51,6 +77,8 @@ export const useCareerGuidanceData = () => {
               relevanceScore: parseInt(values[3].split('-')[0].replace(/\D/g, '') || '0'),
               salaryRange: values[4].trim(),
               careerRoadmap: values[5].trim().replace(/"/g, ''),
+              briefOverview: values[6].trim().replace(/"/g, ''),
+              dayToDayTasks: values[7].trim().replace(/"/g, '')
             });
           }
         }
@@ -181,7 +209,7 @@ export const getCareerSuggestionsBySelectedSkills = (
   const normalizedSelectedHobbies = selectedHobbies.map(hobby => hobby.toLowerCase());
 
   // Score each career entry based on skill and hobby matches
-  const scoredCareers = data.map(career => {
+  const scoredCareers: ScoredCareer[] = data.map(career => {
     let score = 0;
     const maxScore = 100;
     
@@ -229,24 +257,24 @@ export const getCareerSuggestionsBySelectedSkills = (
       }
     }
     
-    return { career, score, relevanceScore: career.relevanceScore };
+    return { ...career, score };
   });
+
+  // Sort by score and remove duplicates
+  const uniqueCareers = new Map<string, ScoredCareer>();
   
-  // Filter out entries with low match scores
-  let filteredCareers = scoredCareers.filter(item => item.score > 0);
-  
-  // Sort careers by match score (primary) and then by relevance score (secondary)
-  filteredCareers.sort((a, b) => {
-    // First compare by match score
-    if (b.score !== a.score) {
-      return b.score - a.score;
-    }
-    // If match scores are equal, compare by relevance score
-    return b.relevanceScore - a.relevanceScore;
-  });
-  
-  // Return at most 10 suggestions
-  return filteredCareers.slice(0, 10).map(item => item.career);
+  scoredCareers
+    .sort((a, b) => b.score - a.score)
+    .forEach(career => {
+      if (!uniqueCareers.has(career.suggestedCareer)) {
+        uniqueCareers.set(career.suggestedCareer, career);
+      }
+    });
+
+  // Return top 10 unique careers
+  return Array.from(uniqueCareers.values())
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 10);
 };
 
 // Function to get career suggestions based on skills and interests

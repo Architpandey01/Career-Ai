@@ -1,0 +1,4720 @@
+{
+  "Game Developer": {
+    "title": "Game Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Understand Game Dev (Weeks 1\u20132)",
+        "topics": [
+          "What is Game Dev?",
+          "Engines: Unity, Unreal, Godot",
+          "Platforms: PC, Mobile, Console",
+          "Choose C#, C++, or GDScript",
+          "Learn Variables, Loops, OOP",
+          "Practice with small scripts",
+          "Unity: GameObjects, Physics, UI",
+          "Godot: Nodes, GDScript, Signals",
+          "Unreal: Blueprints, Actors, Levels"
+        ]
+      },
+      {
+        "title": "\ud83e\uddea Phase 4: Build Games (Weeks 21\u201332)",
+        "topics": [
+          "Pong, Flappy Bird, Shooter",
+          "Platformer, RPG, Puzzle Games"
+        ]
+      },
+      {
+        "title": "\ud83d\uddbc\ufe0f Phase 5: Art, Audio & UI",
+        "topics": [
+          "2D/3D Art, Pixel Art, Blender",
+          "Sound Integration",
+          "UI Design, UX, Feedback"
+        ]
+      },
+      {
+        "title": "\ud83d\udd22 Phase 6: Game Math & Physics",
+        "topics": [
+          "Vectors, Collisions, Trig",
+          "Pathfinding, AI Basics",
+          "Save Progress, Polish Game Feel",
+          "Particles, Screenshake, Transitions",
+          "Export to PC, Mobile, Web",
+          "Monetize: Ads, IAP, Steam, Patreon",
+          "Share Projects, Devlogs",
+          "Join Game Jams, Discords"
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 10: Launch Your Career",
+        "topics": [
+          "Portfolio, Resume, GitHub",
+          "Apply, Freelance, Build Studio"
+        ]
+      }
+    ]
+  },
+  "Sports Analytics Developer": {
+    "title": "Sports Analytics Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Fitness App Developer": {
+    "title": "Fitness App Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Audio Software Developer": {
+    "title": "Audio Software Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Technical Writer": {
+    "title": "Technical Writer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Food Tech Developer": {
+    "title": "Food Tech Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Digital Art Tool Developer": {
+    "title": "Digital Art Tool Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Frontend Developer": {
+    "title": "Frontend Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Understanding the Basics (Weeks 1\u20134)",
+        "topics": [
+          "What is HTTP/HTTPS?",
+          "What is a browser and how it renders pages",
+          "Understand client vs server",
+          "DNS, Hosting, Domain Names",
+          "[MDN Web Docs - How the Web Works](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works)",
+          "YouTube: Computerphile channel",
+          "HTML Elements, Attributes",
+          "Semantic HTML",
+          "Forms & Inputs",
+          "Tables, Lists, Images, Links",
+          "Selectors, Properties, Specificity",
+          "Box Model \ud83d\udce6",
+          "Positioning",
+          "Flexbox \ud83d\udcaa",
+          "Grid Layout \ud83e\udde9",
+          "Media Queries",
+          "Transitions and Animations",
+          "Basic Accessibility \u267f",
+          "freeCodeCamp",
+          "Flexbox Froggy",
+          "CSS Tricks"
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 3: JavaScript Fundamentals (Weeks 9\u201316)",
+        "topics": [
+          "Variables, Data Types",
+          "Conditionals, Functions",
+          "Arrays, Objects, Loops",
+          "DOM Manipulation",
+          "Events",
+          "ES6+ Syntax"
+        ]
+      },
+      {
+        "title": "\ud83d\udce6 Phase 4: Dev Tools & Git (Weeks 17\u201320)",
+        "topics": [
+          "Git/GitHub Basics",
+          "VS Code, DevTools",
+          "Prettier, ESLint"
+        ]
+      },
+      {
+        "title": "\u269b\ufe0f Phase 5: React (Weeks 21\u201332)",
+        "topics": [
+          "Components, Props, State",
+          "Hooks (useState, useEffect)",
+          "Routing, Forms",
+          "React Libraries"
+        ]
+      },
+      {
+        "title": "\ud83e\uddea Phase 6: Advanced Concepts",
+        "topics": [
+          "State Management",
+          "API Integration",
+          "Auth, Lazy Loading",
+          "Testing, a11y, SEO"
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 7: Build Projects",
+        "topics": [
+          "Portfolio, Blog, E-Commerce",
+          "Deploy to Netlify, Vercel",
+          "TypeScript, Tailwind",
+          "Next.js, Framer Motion",
+          "CI/CD, PWAs"
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 8: Get Hired",
+        "topics": [
+          "Resume, LinkedIn, GitHub",
+          "Interviews, Projects",
+          "Networking, Open Source"
+        ]
+      }
+    ]
+  },
+  "CMS Developer": {
+    "title": "CMS Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "E-commerce Developer": {
+    "title": "E-commerce Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "EdTech Developer": {
+    "title": "EdTech Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Research Scientist": {
+    "title": "Research Scientist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Sports Data Scientist": {
+    "title": "Sports Data Scientist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Quantitative Analyst": {
+    "title": "Quantitative Analyst",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Healthcare Data Scientist": {
+    "title": "Healthcare Data Scientist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Game Analytics Specialist": {
+    "title": "Game Analytics Specialist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Travel App Developer": {
+    "title": "Travel App Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Camera App Developer": {
+    "title": "Camera App Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Social Media App Developer": {
+    "title": "Social Media App Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Health & Fitness App Developer": {
+    "title": "Health & Fitness App Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Game UI Designer": {
+    "title": "Game UI Designer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Fashion E-commerce Designer": {
+    "title": "Fashion E-commerce Designer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Medical App Designer": {
+    "title": "Medical App Designer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Educational App Designer": {
+    "title": "Educational App Designer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Social Media Manager": {
+    "title": "Social Media Manager",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Gaming Community Manager": {
+    "title": "Gaming Community Manager",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Travel Marketing Specialist": {
+    "title": "Travel Marketing Specialist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Food & Beverage Marketer": {
+    "title": "Food & Beverage Marketer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Game Video Producer": {
+    "title": "Game Video Producer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Sports Video Producer": {
+    "title": "Sports Video Producer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Music Video Director": {
+    "title": "Music Video Director",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Travel Videographer": {
+    "title": "Travel Videographer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Game Security Engineer": {
+    "title": "Game Security Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Financial Security Expert": {
+    "title": "Financial Security Expert",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Healthcare Security Specialist": {
+    "title": "Healthcare Security Specialist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Government Cyber Expert": {
+    "title": "Government Cyber Expert",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Game Environment Artist": {
+    "title": "Game Environment Artist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Architectural Visualizer": {
+    "title": "Architectural Visualizer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "3D Animation Artist": {
+    "title": "3D Animation Artist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Product Visualizer": {
+    "title": "Product Visualizer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Game Producer": {
+    "title": "Game Producer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Sports Event Manager": {
+    "title": "Sports Event Manager",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Construction Project Manager": {
+    "title": "Construction Project Manager",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Healthcare Project Manager": {
+    "title": "Healthcare Project Manager",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Game Story Writer": {
+    "title": "Game Story Writer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Travel Content Creator": {
+    "title": "Travel Content Creator",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Tech Journalist": {
+    "title": "Tech Journalist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Financial Writer": {
+    "title": "Financial Writer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "AI Research Engineer": {
+    "title": "AI Research Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Game AI Engineer": {
+    "title": "Game AI Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Medical AI Specialist": {
+    "title": "Medical AI Specialist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Financial AI Engineer": {
+    "title": "Financial AI Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Software Engineer": {
+    "title": "Software Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Web Developer": {
+    "title": "Web Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Data Scientist": {
+    "title": "Data Scientist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Mobile App Developer": {
+    "title": "Mobile App Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Product Designer": {
+    "title": "Product Designer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Digital Marketer": {
+    "title": "Digital Marketer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Video Producer": {
+    "title": "Video Producer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Security Analyst": {
+    "title": "Security Analyst",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "3D Artist": {
+    "title": "3D Artist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Project Manager": {
+    "title": "Project Manager",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Content Strategist": {
+    "title": "Content Strategist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Machine Learning Engineer": {
+    "title": "Machine Learning Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "DevOps Engineer": {
+    "title": "DevOps Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "QA Engineer": {
+    "title": "QA Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Data Engineer": {
+    "title": "Data Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Cloud Architect": {
+    "title": "Cloud Architect",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Software Developer": {
+    "title": "Software Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Cybersecurity Analyst": {
+    "title": "Cybersecurity Analyst",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "IoT Engineer": {
+    "title": "IoT Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Full Stack Developer": {
+    "title": "Full Stack Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "AI/ML Engineer": {
+    "title": "AI/ML Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Blockchain Developer": {
+    "title": "Blockchain Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Embedded Systems Engineer": {
+    "title": "Embedded Systems Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Site Reliability Engineer (SRE)": {
+    "title": "Site Reliability Engineer (SRE)",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Platform Engineer": {
+    "title": "Platform Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "CI/CD Engineer": {
+    "title": "CI/CD Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Cloud Solutions Architect": {
+    "title": "Cloud Solutions Architect",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Cloud Security Engineer": {
+    "title": "Cloud Security Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Multi-cloud Engineer": {
+    "title": "Multi-cloud Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "ETL Developer": {
+    "title": "ETL Developer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Big Data Engineer": {
+    "title": "Big Data Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Cloud Data Engineer": {
+    "title": "Cloud Data Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "QA Analyst": {
+    "title": "QA Analyst",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Automation Test Engineer": {
+    "title": "Automation Test Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Performance Tester": {
+    "title": "Performance Tester",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "QA Lead": {
+    "title": "QA Lead",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "UI Designer": {
+    "title": "UI Designer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "UX Researcher": {
+    "title": "UX Researcher",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Interaction Designer": {
+    "title": "Interaction Designer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Penetration Tester": {
+    "title": "Penetration Tester",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Security Consultant": {
+    "title": "Security Consultant",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "SOC Analyst": {
+    "title": "SOC Analyst",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "AI Engineer": {
+    "title": "AI Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "NLP Engineer": {
+    "title": "NLP Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Computer Vision Engineer": {
+    "title": "Computer Vision Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Product Manager": {
+    "title": "Product Manager",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Technical Product Manager": {
+    "title": "Technical Product Manager",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Product Owner": {
+    "title": "Product Owner",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Growth Product Manager": {
+    "title": "Growth Product Manager",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Cloud Security Architect": {
+    "title": "Cloud Security Architect",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "IAM Specialist": {
+    "title": "IAM Specialist",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Cloud Compliance Analyst": {
+    "title": "Cloud Compliance Analyst",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Cloud Risk Assessor": {
+    "title": "Cloud Risk Assessor",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Gameplay Programmer": {
+    "title": "Gameplay Programmer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Game Designer": {
+    "title": "Game Designer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Level Designer": {
+    "title": "Level Designer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Robotics Engineer": {
+    "title": "Robotics Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Automation Engineer": {
+    "title": "Automation Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  },
+  "Mechatronics Engineer": {
+    "title": "Mechatronics Engineer",
+    "phases": [
+      {
+        "title": "\ud83e\udded Phase 1: Foundations (Weeks 1\u20134)",
+        "topics": [
+          "Understand basic concepts, tools, and workflows.",
+          "Learn key terminology and beginner-level frameworks or software."
+        ]
+      },
+      {
+        "title": "\ud83d\udd27 Phase 2: Intermediate Skills (Weeks 5\u201312)",
+        "topics": [
+          "Explore core workflows and tools used in the industry.",
+          "Build basic to intermediate level projects."
+        ]
+      },
+      {
+        "title": "\ud83c\udfaf Phase 3: Specialization (Weeks 13\u201320)",
+        "topics": [
+          "Learn advanced tools and techniques.",
+          "Pick a niche and go deep.",
+          "Build a specialization project or contribute to open source."
+        ]
+      },
+      {
+        "title": "\ud83d\udcbc Phase 4: Real-world Practice (Weeks 21\u201328)",
+        "topics": [
+          "Build a strong portfolio.",
+          "Take on freelance/client work, hackathons, or internships."
+        ]
+      },
+      {
+        "title": "\ud83d\ude80 Phase 5: Launch Your Career",
+        "topics": [
+          "Prepare resume, LinkedIn, and GitHub.",
+          "Apply for jobs or freelance gigs.",
+          "Keep learning and building!"
+        ]
+      }
+    ]
+  }
+}
