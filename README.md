@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+# site under maintenance for now 😂
 # CareerAI - Career Guidance and Resume Builder
 
 A modern web application that helps users build professional resumes and receive career guidance using AI-powered insights.
