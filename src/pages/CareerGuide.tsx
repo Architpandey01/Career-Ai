@@ -1247,15 +1247,78 @@ ${career.dayToDayTasks || `- Collaborating with cross-functional teams
   // Add these helper functions for roadmap templates
   const generateDetailedRoadmapTemplate = (career: CareerGuidanceEntry): string => {
     const careerLower = career.suggestedCareer.toLowerCase();
+    console.log('🔍 ROADMAP MATCHING (CareerGuide) - Searching for career:', career.suggestedCareer);
     
     // Try to find a matching roadmap in the JSON file
     const roadmaps = require('../public/final_detailed_career_roadmaps.json') as RoadmapData;
-    const matchingRoadmap = Object.entries(roadmaps).find(([key]) => 
-      careerLower.includes(key.toLowerCase()) || key.toLowerCase().includes(careerLower)
+    
+    // First try exact match
+    let matchingRoadmap = Object.entries(roadmaps).find(([key]) => 
+      key.toLowerCase() === careerLower
     );
+    
+    if (matchingRoadmap) {
+      console.log('✅ ROADMAP MATCHING (CareerGuide) - Found exact match:', matchingRoadmap[0]);
+    }
+    
+    // If no exact match, try full word match
+    if (!matchingRoadmap) {
+      console.log('🔄 ROADMAP MATCHING (CareerGuide) - Trying full word match...');
+      matchingRoadmap = Object.entries(roadmaps).find(([key]) => {
+        const keyWords = key.toLowerCase().split(/\s+/);
+        const careerWords = careerLower.split(/\s+/);
+        const matches = careerWords.every(word => keyWords.includes(word));
+        if (matches) {
+          console.log('✅ ROADMAP MATCHING (CareerGuide) - Found full word match:', key);
+        }
+        return matches;
+      });
+    }
+    
+    // If still no match, try partial match with word boundaries
+    if (!matchingRoadmap) {
+      console.log('🔄 ROADMAP MATCHING (CareerGuide) - Trying word boundary match...');
+      matchingRoadmap = Object.entries(roadmaps).find(([key]) => {
+        const keyLower = key.toLowerCase();
+        // Check if the career title appears as a whole word in the key
+        const matches = keyLower.includes(' ' + careerLower + ' ') || 
+               keyLower.startsWith(careerLower + ' ') || 
+               keyLower.endsWith(' ' + careerLower) ||
+               keyLower === careerLower;
+        if (matches) {
+          console.log('✅ ROADMAP MATCHING (CareerGuide) - Found word boundary match:', key);
+        }
+        return matches;
+      });
+    }
+    
+    // Last resort: check if any of the career words are in the key
+    if (!matchingRoadmap) {
+      console.log('🔄 ROADMAP MATCHING (CareerGuide) - Trying significant word match...');
+      const careerWords = careerLower.split(/\s+/).filter(word => word.length > 3); // Only use significant words
+      console.log('🔍 ROADMAP MATCHING (CareerGuide) - Significant words:', careerWords);
+      
+      if (careerWords.length > 0) {
+        matchingRoadmap = Object.entries(roadmaps).find(([key]) => {
+          const keyLower = key.toLowerCase();
+          const matchingWord = careerWords.find(word => 
+            keyLower.includes(' ' + word + ' ') || 
+            keyLower.startsWith(word + ' ') || 
+            keyLower.endsWith(' ' + word) ||
+            keyLower === word
+          );
+          if (matchingWord) {
+            console.log(`✅ ROADMAP MATCHING (CareerGuide) - Found match on word "${matchingWord}" in key "${key}"`);
+            return true;
+          }
+          return false;
+        });
+      }
+    }
 
     if (matchingRoadmap) {
-      const [_, roadmap] = matchingRoadmap;
+      const [matchedKey, roadmap] = matchingRoadmap;
+      console.log('✅ ROADMAP SELECTED (CareerGuide):', matchedKey);
       let response = `**${roadmap.title}**\n\n`;
       
       roadmap.phases.forEach(phase => {
@@ -1267,6 +1330,8 @@ ${career.dayToDayTasks || `- Collaborating with cross-functional teams
       });
       
       return response;
+    } else {
+      console.log('❌ ROADMAP MATCHING (CareerGuide) - No match found for:', career.suggestedCareer);
     }
     
     return `I don't have a detailed roadmap template for ${career.suggestedCareer} yet.`;

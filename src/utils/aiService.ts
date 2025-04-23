@@ -91,21 +91,75 @@ export const generateCareerRoadmap = async (
     const roadmaps: RoadmapsData = await response.json();
     
     const careerLower = career.suggestedCareer.toLowerCase();
+    console.log('🔍 ROADMAP MATCHING - Searching for career:', career.suggestedCareer);
     
     // First try exact match
     let matchingRoadmap = Object.entries(roadmaps).find(([key]) => 
       key.toLowerCase() === careerLower
     );
     
-    // If no exact match, try partial match
+    if (matchingRoadmap) {
+      console.log('✅ ROADMAP MATCHING - Found exact match:', matchingRoadmap[0]);
+    }
+    
+    // If no exact match, try full word match
     if (!matchingRoadmap) {
-      matchingRoadmap = Object.entries(roadmaps).find(([key]) => 
-        careerLower.includes(key.toLowerCase()) || key.toLowerCase().includes(careerLower)
-      );
+      console.log('🔄 ROADMAP MATCHING - Trying full word match...');
+      matchingRoadmap = Object.entries(roadmaps).find(([key]) => {
+        const keyWords = key.toLowerCase().split(/\s+/);
+        const careerWords = careerLower.split(/\s+/);
+        const matches = careerWords.every(word => keyWords.includes(word));
+        if (matches) {
+          console.log('✅ ROADMAP MATCHING - Found full word match:', key);
+        }
+        return matches;
+      });
+    }
+    
+    // If still no match, try partial match with word boundaries
+    if (!matchingRoadmap) {
+      console.log('🔄 ROADMAP MATCHING - Trying word boundary match...');
+      matchingRoadmap = Object.entries(roadmaps).find(([key]) => {
+        const keyLower = key.toLowerCase();
+        // Check if the career title appears as a whole word in the key
+        const matches = keyLower.includes(' ' + careerLower + ' ') || 
+               keyLower.startsWith(careerLower + ' ') || 
+               keyLower.endsWith(' ' + careerLower) ||
+               keyLower === careerLower;
+        if (matches) {
+          console.log('✅ ROADMAP MATCHING - Found word boundary match:', key);
+        }
+        return matches;
+      });
+    }
+    
+    // Last resort: check if any of the career words are in the key
+    if (!matchingRoadmap) {
+      console.log('🔄 ROADMAP MATCHING - Trying significant word match...');
+      const careerWords = careerLower.split(/\s+/).filter(word => word.length > 3); // Only use significant words
+      console.log('🔍 ROADMAP MATCHING - Significant words:', careerWords);
+      
+      if (careerWords.length > 0) {
+        matchingRoadmap = Object.entries(roadmaps).find(([key]) => {
+          const keyLower = key.toLowerCase();
+          const matchingWord = careerWords.find(word => 
+            keyLower.includes(' ' + word + ' ') || 
+            keyLower.startsWith(word + ' ') || 
+            keyLower.endsWith(' ' + word) ||
+            keyLower === word
+          );
+          if (matchingWord) {
+            console.log(`✅ ROADMAP MATCHING - Found match on word "${matchingWord}" in key "${key}"`);
+            return true;
+          }
+          return false;
+        });
+      }
     }
 
     if (matchingRoadmap) {
-      const [_, roadmap] = matchingRoadmap;
+      const [matchedKey, roadmap] = matchingRoadmap;
+      console.log('✅ ROADMAP SELECTED:', matchedKey);
       let response = `**${roadmap.title}**\n\n`;
       
       roadmap.phases.forEach(phase => {
@@ -117,6 +171,8 @@ export const generateCareerRoadmap = async (
       });
       
       return response;
+    } else {
+      console.log('❌ ROADMAP MATCHING - No match found for:', career.suggestedCareer);
     }
     
     // Fallback to template if no matching roadmap found
@@ -238,18 +294,80 @@ The demand for ${career.suggestedCareer}s is growing rapidly as organizations co
  */
 const generateDetailedRoadmapTemplate = async (career: CareerGuidanceEntry): Promise<string> => {
   const careerLower = career.suggestedCareer.toLowerCase();
+  console.log('🔍 ROADMAP MATCHING (aiService) - Searching for career:', career.suggestedCareer);
   
   try {
     // Fetch the roadmap data from the public directory
-    const response = await fetch('/detailed_career_roadmaps.json');
+    const response = await fetch('/final_detailed_career_roadmaps.json');
     const roadmaps: RoadmapsData = await response.json();
     
-    const matchingRoadmap = Object.entries(roadmaps).find(([key]) => 
-      careerLower.includes(key.toLowerCase()) || key.toLowerCase().includes(careerLower)
+    // First try exact match
+    let matchingRoadmap = Object.entries(roadmaps).find(([key]) => 
+      key.toLowerCase() === careerLower
     );
+    
+    if (matchingRoadmap) {
+      console.log('✅ ROADMAP MATCHING (aiService) - Found exact match:', matchingRoadmap[0]);
+    }
+    
+    // If no exact match, try full word match
+    if (!matchingRoadmap) {
+      console.log('🔄 ROADMAP MATCHING (aiService) - Trying full word match...');
+      matchingRoadmap = Object.entries(roadmaps).find(([key]) => {
+        const keyWords = key.toLowerCase().split(/\s+/);
+        const careerWords = careerLower.split(/\s+/);
+        const matches = careerWords.every(word => keyWords.includes(word));
+        if (matches) {
+          console.log('✅ ROADMAP MATCHING (aiService) - Found full word match:', key);
+        }
+        return matches;
+      });
+    }
+    
+    // If still no match, try partial match with word boundaries
+    if (!matchingRoadmap) {
+      console.log('🔄 ROADMAP MATCHING (aiService) - Trying word boundary match...');
+      matchingRoadmap = Object.entries(roadmaps).find(([key]) => {
+        const keyLower = key.toLowerCase();
+        // Check if the career title appears as a whole word in the key
+        const matches = keyLower.includes(' ' + careerLower + ' ') || 
+               keyLower.startsWith(careerLower + ' ') || 
+               keyLower.endsWith(' ' + careerLower) ||
+               keyLower === careerLower;
+        if (matches) {
+          console.log('✅ ROADMAP MATCHING (aiService) - Found word boundary match:', key);
+        }
+        return matches;
+      });
+    }
+    
+    // Last resort: check if any of the career words are in the key
+    if (!matchingRoadmap) {
+      console.log('🔄 ROADMAP MATCHING (aiService) - Trying significant word match...');
+      const careerWords = careerLower.split(/\s+/).filter(word => word.length > 3); // Only use significant words
+      console.log('🔍 ROADMAP MATCHING (aiService) - Significant words:', careerWords);
+      
+      if (careerWords.length > 0) {
+        matchingRoadmap = Object.entries(roadmaps).find(([key]) => {
+          const keyLower = key.toLowerCase();
+          const matchingWord = careerWords.find(word => 
+            keyLower.includes(' ' + word + ' ') || 
+            keyLower.startsWith(word + ' ') || 
+            keyLower.endsWith(' ' + word) ||
+            keyLower === word
+          );
+          if (matchingWord) {
+            console.log(`✅ ROADMAP MATCHING (aiService) - Found match on word "${matchingWord}" in key "${key}"`);
+            return true;
+          }
+          return false;
+        });
+      }
+    }
 
     if (matchingRoadmap) {
-      const [title, roadmap] = matchingRoadmap;
+      const [matchedKey, roadmap] = matchingRoadmap;
+      console.log('✅ ROADMAP SELECTED (aiService):', matchedKey);
       let response = `**🎯 ${roadmap.title} Roadmap**\n\n`;
       
       roadmap.phases.forEach(phase => {
@@ -261,6 +379,8 @@ const generateDetailedRoadmapTemplate = async (career: CareerGuidanceEntry): Pro
       });
 
       return response;
+    } else {
+      console.log('❌ ROADMAP MATCHING (aiService) - No match found for:', career.suggestedCareer);
     }
   } catch (error) {
     console.error('Error loading roadmap data:', error);
